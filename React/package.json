@@ -1,0 +1,50 @@
+{
+  "name": "legal-matter-contract-management-portal",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@syncfusion/ej2-react-base": "*",
+    "@syncfusion/ej2-react-buttons": "*",
+    "@syncfusion/ej2-react-calendars": "*",
+    "@syncfusion/ej2-react-charts": "*",
+    "@syncfusion/ej2-react-documenteditor": "*",
+    "@syncfusion/ej2-react-dropdowns": "*",
+    "@syncfusion/ej2-react-filemanager": "*",
+    "@syncfusion/ej2-react-grids": "*",
+    "@syncfusion/ej2-react-heatmap": "*",
+    "@syncfusion/ej2-react-inputs": "*",
+    "@syncfusion/ej2-react-kanban": "*",
+    "@syncfusion/ej2-react-layouts": "*",
+    "@syncfusion/ej2-react-lists": "*",
+    "@syncfusion/ej2-react-navigations": "*",
+    "@syncfusion/ej2-react-notifications": "*",
+    "@syncfusion/ej2-react-pdfviewer": "*",
+    "@syncfusion/ej2-react-popups": "*",
+    "@syncfusion/ej2-react-progressbar": "*",
+    "@syncfusion/ej2-react-schedule": "*",
+    "lucide-react": "^0.460.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vitejs/plugin-react": "^4.1.1",
+    "eslint": "^8.53.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.4",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0"
+  }
+}

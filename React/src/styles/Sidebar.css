@@ -1,0 +1,340 @@
+/* Sidebar — docked on desktop, overlay on mobile. */
+
+:root {
+  /* Layout dimensions (overridable per-platform later) */
+  --sidebar-width-expanded: 260px;
+  --sidebar-width-collapsed: 64px;
+  --sidebar-transition: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Shell (the outer element that switches width) ---------- */
+.sidebar-shell,
+.sidebar-shell.sidebar-shell,
+aside.sidebar-shell {
+  width: var(--sidebar-width-expanded);
+  flex-shrink: 0;
+  background: var(--app-sidebar-bg);
+  color: var(--app-sidebar-text);
+  border-right: 1px solid var(--color-sf-border-secondary);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: width var(--sidebar-transition);
+  overflow: hidden;
+  /* Fill the remaining viewport beside the header. */
+  height: 100%;
+  z-index: 50;
+}
+
+.sidebar-shell.is-collapsed {
+  width: var(--sidebar-width-collapsed);
+}
+
+/* ---------- Inner content frame ---------- */
+.sidebar-content,
+div.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: var(--sidebar-width-expanded);
+  min-width: var(--sidebar-width-expanded);
+  background: var(--app-sidebar-bg);
+  color: var(--app-sidebar-text);
+  transition: opacity var(--sidebar-transition), width var(--sidebar-transition);
+}
+
+/* ---------- Brand ---------- */
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-20) var(--spacing-16);
+  border-bottom: 1px solid var(--color-sf-border-secondary);
+  min-height: var(--header-height);
+}
+
+.sidebar-brand-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-8);
+  background: var(--app-brand);
+  color: var(--color-sf-fg-on-brand-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sidebar-brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity var(--sidebar-transition);
+}
+
+.sidebar-brand-text h3 {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text-primary);
+  line-height: var(--line-height-sm);
+  margin: 0;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.sidebar-brand-text p {
+  font-size: var(--font-size-xs);
+  color: var(--app-text-tertiary);
+  margin: var(--spacing-2) 0 0;
+}
+
+/* Collapsed mode: shrink the inner content so icons/buttons center in the visible strip */
+.sidebar-content.is-collapsed {
+  width: var(--sidebar-width-collapsed);
+  min-width: var(--sidebar-width-collapsed);
+}
+
+/* Hide text labels in collapsed mode (icons remain) */
+.sidebar-content.is-collapsed .sidebar-brand-text,
+.sidebar-content.is-collapsed .nav-label,
+.sidebar-content.is-collapsed .nav-badge {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Center brand icon when collapsed */
+.sidebar-content.is-collapsed .sidebar-brand {
+  justify-content: center;
+  padding-left: var(--spacing-12);
+  padding-right: var(--spacing-12);
+}
+
+/* ---------- Nav ---------- */
+.sidebar-nav {
+  flex: 1;
+  padding: var(--spacing-12) var(--spacing-10);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-10) var(--spacing-12);
+  border-radius: var(--list-hover-radius);
+  border: none;
+  background: var(--color-sf-base-transparent);
+  color: var(--app-sidebar-text);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+  text-align: left;
+  width: 100%;
+  position: relative;
+  white-space: nowrap;
+  min-height: 40px;
+}
+
+.nav-item:hover {
+  background: var(--app-sidebar-active-bg);
+  color: var(--app-sidebar-text-hover);
+}
+
+.nav-item:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring2);
+  border-radius: var(--radius-6);
+}
+
+.nav-item.active {
+  background: var(--app-sidebar-active-bg);
+  color: var(--app-brand);
+  font-weight: var(--font-weight-semibold);
+}
+
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: var(--spacing-8);
+  bottom: var(--spacing-8);
+  width: 3px;
+  background: var(--app-sidebar-active-border);
+  border-radius: 0 var(--radius-4) var(--radius-4) 0;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity var(--sidebar-transition);
+}
+
+.nav-badge {
+  background: var(--color-sf-bg-error-solid);
+  color: var(--color-sf-fg-on-brand-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  min-width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--spacing-6);
+  line-height: 1;
+  transition: opacity var(--sidebar-transition);
+}
+
+/* Center icon-only buttons in collapsed mode */
+.sidebar-content.is-collapsed .nav-item {
+  justify-content: center;
+  padding-left: var(--spacing-12);
+  padding-right: var(--spacing-12);
+}
+
+.sidebar-content.is-collapsed .nav-item.active::before {
+  left: 0;
+}
+
+/* Collapse button label transitions with the rest of the sidebar text */
+.collapse-label {
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity var(--sidebar-transition), width var(--sidebar-transition);
+}
+
+/* Collapsed: hide the label and shrink to a centered icon-only circle */
+.sidebar-content.is-collapsed .collapse-label {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.sidebar-content.is-collapsed .sidebar-theme-btn,
+.sidebar-content.is-collapsed .sidebar-collapse-btn {
+  width: 36px;
+  min-width: 36px;
+  padding: 0;
+}
+
+/* ---------- Footer + collapse / theme buttons ---------- */
+.sidebar-footer {
+  padding: var(--spacing-12);
+  border-top: 1px solid var(--color-sf-border-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--spacing-8);
+}
+
+.sidebar-content.is-collapsed .sidebar-footer {
+  align-items: center;
+}
+
+.sidebar-theme-btn,
+.sidebar-collapse-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  width: auto;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 var(--spacing-10);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-sf-border-primary);
+  background: var(--color-sf-base-transparent);
+  color: var(--app-text-tertiary);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  flex-shrink: 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.sidebar-theme-btn:hover,
+.sidebar-collapse-btn:hover {
+  background: var(--app-sidebar-active-bg);
+  color: var(--app-sidebar-text-hover);
+  border-color: var(--color-sf-border-primary);
+}
+
+.sidebar-theme-btn:focus-visible,
+.sidebar-collapse-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring2);
+}
+
+/* ---------- Mobile drawer + backdrop ---------- */
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--color-sf-utility-overlay-bg-color);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease-out;
+}
+
+.sidebar-backdrop.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar-shell--drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width-expanded);
+  min-height: 100vh;
+  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
+  transform: translateX(-100%);
+  transition: transform 240ms cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 250;
+  border-right: 1px solid var(--color-sf-border-secondary);
+  box-shadow: var(--shadow-xl);
+}
+
+.sidebar-shell--drawer.is-open {
+  transform: translateX(0);
+}
+
+/* When in drawer mode, the content is always full-width (no collapsed state) */
+.sidebar-shell--drawer .sidebar-content {
+  width: var(--sidebar-width-expanded);
+  min-width: var(--sidebar-width-expanded);
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-shell,
+  .sidebar-content,
+  .sidebar-brand-text,
+  .nav-label,
+  .nav-badge,
+  .sidebar-shell--drawer,
+  .sidebar-backdrop {
+    transition-duration: 0.01ms !important;
+  }
+}

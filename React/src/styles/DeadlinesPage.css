@@ -1,0 +1,911 @@
+/* Deadlines & Calendar page. */
+
+.deadlines-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.deadlines-page .panel-body--inline-alert {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+/* ---- Header ---------------------------------------------------------- */
+.deadlines-page .page-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-16);
+  flex-wrap: wrap;
+}
+
+.deadlines-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.deadlines-persona {
+  display: inline-flex;
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--radius-6);
+  overflow: hidden;
+  background: var(--app-surface);
+}
+
+.deadlines-persona .e-btn {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+.deadlines-persona .e-btn.e-primary {
+  background: var(--color-sf-brand-solid-primary) !important;
+  color: var(--color-sf-on-brand-solid-primary) !important;
+}
+
+/* ---- KPI strip -------------------------------------------------------- */
+.deadlines-kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-16);
+}
+.deadlines-kpi-strip .kpi-card {
+  min-width: 0;
+}
+
+/* ---- Filter row ------------------------------------------------------ */
+.deadlines-filter-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-16);
+  background: var(--color-sf-bg-primary);
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--card-md-radius);
+}
+
+.deadlines-filter-row__fields {
+  display: grid;
+  /* 3 filters: Status / Owner / Jurisdiction */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-12);
+  width: 100%;
+  min-width: 0;
+}
+
+.deadlines-filter-field {
+  min-width: 0;
+  width: 100%;
+}
+
+.deadlines-filter-field .e-control-wrapper,
+.deadlines-filter-field .e-multiselect,
+.deadlines-filter-field .e-multi-select-wrapper {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.deadlines-filter-row__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+/* Group by lives on the calendar toolbar (not the filter row) */
+.deadlines-group-by {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.deadlines-group-by__label {
+  font-size: var(--font-size-xs);
+  color: var(--app-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+  white-space: nowrap;
+}
+.deadlines-group-by .e-btn-group {
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--radius-6);
+  overflow: hidden;
+}
+
+@media (max-width: 1023px) {
+  .deadlines-filter-row__fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .deadlines-filter-row__fields {
+    grid-template-columns: 1fr;
+  }
+
+  .deadlines-group-by {
+    margin-left: 0;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
+/* ---- Type color key (legend) — Syncfusion ChipList (selection=Multiple) -- */
+.deadlines-type-key {
+  padding: 0 var(--spacing-4);
+}
+
+.deadlines-type-key__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Style each Syncfusion chip via the per-chip cssClass we pass. */
+.deadlines-type-key__list .e-chip,
+.deadlines-type-key__list .e-chip-list .e-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-6) var(--spacing-12);
+  border: 1px solid var(--color-sf-border-secondary);
+  border-left-width: 4px;
+  border-radius: var(--radius-6);
+  background: var(--color-sf-bg-primary);
+  color: var(--app-text-primary);
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--font-size-sm);
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+.deadlines-type-key__list .e-chip .e-chip-icon,
+.deadlines-type-key__list .e-chip .e-icons {
+  font-size: var(--font-size-sm);
+  color: currentColor;
+}
+.deadlines-type-key__list .e-chip .e-chip-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+.deadlines-type-key__list .e-chip .e-chip-close {
+  display: none; /* not used as input chip */
+}
+
+/* Per-type accent — semantic tokens only (no hex). */
+.deadlines-type-key__list .deadline-type--court   { border-left-color: var(--color-sf-fg-success-primary); }
+.deadlines-type-key__list .deadline-type--filing  { border-left-color: var(--color-sf-brand-500); }
+.deadlines-type-key__list .deadline-type--sol     { border-left-color: var(--color-sf-fg-error-primary); }
+.deadlines-type-key__list .deadline-type--renewal { border-left-color: var(--color-sf-fg-warning-primary); }
+
+/* Overdue variant for the chip when any overdue deadline of that type is present. */
+.deadlines-type-key__list .deadlines-type-key__chip.is-overdue {
+  background: var(--color-sf-bg-error-primary);
+  border-color: var(--color-sf-border-error);
+}
+
+/* Selected (filter active) — Syncfusion adds .e-active on the selected chip. */
+.deadlines-type-key__list .e-chip.e-active,
+.deadlines-type-key__list .deadlines-type-key__chip.is-selected {
+  background: var(--color-sf-bg-active);
+  border-color: var(--color-sf-border-primary);
+  box-shadow: inset 0 0 0 1px var(--color-sf-border-primary);
+}
+.deadlines-type-key__list .e-chip:focus-visible {
+  outline: 2px solid var(--color-sf-border-primary);
+  outline-offset: 2px;
+}
+
+/* ---- Main grid (docket + calendar) ----------------------------------- */
+.deadlines-grid {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: var(--spacing-16);
+  align-items: stretch;
+}
+
+@media (max-width: 1024px) {
+  .deadlines-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- Upcoming docket (ListView rail) --------------------------------- */
+.deadlines-docket {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--color-sf-bg-primary);
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--card-md-radius);
+  padding: var(--spacing-16);
+  max-height: 520px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.deadlines-docket__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+  margin-bottom: var(--spacing-12);
+  flex-shrink: 0;
+}
+.deadlines-docket__header h2 {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-base);
+  color: var(--app-text-primary);
+}
+.deadlines-docket__count {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text-secondary);
+  font-variant-numeric: tabular-nums;
+  background: var(--color-sf-bg-tertiary);
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--radius-full);
+  padding: var(--spacing-2) var(--spacing-8);
+  line-height: var(--line-height-xs);
+}
+
+/* ListView root — fill rail, no default Syncfusion chrome clashes */
+.deadlines-docket__list.e-listview,
+.deadlines-docket .deadlines-docket__list {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  border: none;
+  background: transparent;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.deadlines-docket__list .e-list-parent,
+.deadlines-docket__list ul {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.deadlines-docket__list .e-list-item {
+  display: block;
+  margin: 0 0 var(--spacing-8);
+  padding: 0;
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--list-hover-radius, var(--radius-6));
+  background: var(--color-sf-bg-primary);
+  color: var(--app-text-primary);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  height: auto !important;
+  min-height: 0 !important;
+  line-height: inherit !important;
+}
+
+.deadlines-docket__list .e-list-item:last-child {
+  margin-bottom: 0;
+}
+
+.deadlines-docket__list .e-list-item:hover {
+  background: var(--color-sf-bg-primary-hover);
+  border-color: var(--color-sf-border-primary);
+}
+
+.deadlines-docket__list .e-list-item.e-active,
+.deadlines-docket__list .e-list-item.e-focused,
+.deadlines-docket__list .e-list-item.e-hover {
+  background: var(--color-sf-bg-brand-primary);
+  border-color: var(--color-sf-border-brand);
+  color: var(--app-text-primary);
+}
+
+.deadlines-docket__list .e-list-item .e-text-content,
+.deadlines-docket__list .e-list-item .e-list-wrapper,
+.deadlines-docket__list .e-list-item .e-list-content {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: inherit;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+
+/* Docket item template (matter · title · date · type · risk) */
+.docket-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding: var(--spacing-10) var(--spacing-12);
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.docket-item__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+  min-width: 0;
+}
+
+.docket-item__matter {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-xs);
+  color: var(--color-sf-fg-brand-primary);
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.docket-item__date {
+  flex-shrink: 0;
+  font-size: var(--font-size-xxs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-xxs);
+  color: var(--app-text-tertiary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.docket-item__title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-sm);
+  color: var(--app-text-primary);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.docket-item__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-6);
+  min-width: 0;
+}
+
+.docket-item__type {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-2) var(--spacing-8);
+  border-radius: var(--chip-radius, var(--radius-6));
+  border: 1px solid var(--color-sf-border-secondary);
+  border-left-width: 3px;
+  background: var(--color-sf-bg-secondary);
+  color: var(--app-text-secondary);
+  font-size: var(--font-size-xxs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-xxs);
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.docket-item__type .e-icons {
+  font-size: var(--font-size-xs);
+  color: currentColor;
+  flex-shrink: 0;
+}
+
+/* Type accent uses same left-border classes as legend chips */
+.docket-item__type.deadline-type--court,
+.docket-item__type.deadline-type--filing,
+.docket-item__type.deadline-type--sol,
+.docket-item__type.deadline-type--renewal {
+  background: var(--color-sf-bg-secondary);
+}
+
+.docket-item__risk {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-2) var(--spacing-8);
+  border-radius: var(--radius-full);
+  border: 1px solid transparent;
+  font-size: var(--font-size-xxs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-xxs);
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+.docket-item__risk--low {
+  background: var(--app-severity-low-bg);
+  color: var(--app-severity-low-text);
+  border-color: var(--color-sf-border-secondary);
+}
+
+.docket-item__risk--medium {
+  background: var(--app-severity-medium-bg);
+  color: var(--app-severity-medium-text);
+  border-color: var(--color-sf-border-info);
+}
+
+.docket-item__risk--high {
+  background: var(--app-severity-high-bg);
+  color: var(--app-severity-high-text);
+  border-color: var(--color-sf-border-warning);
+}
+
+/* ---- Calendar section ----------------------------------------------- */
+.deadlines-calendar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--color-sf-bg-primary);
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--card-md-radius);
+  min-height: 560px;
+}
+
+.deadlines-calendar__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12) var(--spacing-16);
+  border-bottom: 1px solid var(--color-sf-border-secondary);
+}
+.deadlines-calendar__toolbar .e-btn .e-icons {
+  margin-right: var(--spacing-4);
+}
+/* Group by already has margin-left: auto; New Deadline follows it on the right */
+.deadlines-calendar__new {
+  margin-left: 0;
+}
+
+.deadlines-calendar .deadlines-scheduler,
+.deadlines-calendar .e-schedule {
+  flex: 1 1 auto;
+  width: 100% !important;
+}
+
+/* ---- Scheduler event emphasis --------------------------------------- */
+.deadlines-scheduler .e-appointment .deadline-status--overdue,
+.deadlines-scheduler .e-appointment.deadline-overdue {
+  border: 2px solid var(--color-sf-fg-error-primary) !important;
+  background: var(--color-sf-bg-error-secondary) !important;
+  color: var(--app-text-primary) !important;
+}
+.deadlines-scheduler .e-appointment.deadline-sol {
+  cursor: not-allowed;
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent var(--spacing-6),
+    var(--color-sf-bg-error-secondary) var(--spacing-6),
+    var(--color-sf-bg-error-secondary) var(--spacing-12)
+  );
+}
+.deadlines-scheduler .e-appointment.deadline-risk--high {
+  box-shadow: 0 0 0 1px var(--color-sf-fg-error-primary);
+}
+.deadlines-scheduler .e-appointment.deadline-risk--medium {
+  box-shadow: 0 0 0 1px var(--color-sf-fg-warning-primary);
+}
+
+/* ---- Empty states --------------------------------------------------- */
+.deadlines-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-32) var(--spacing-16);
+  color: var(--app-text-secondary);
+  text-align: center;
+  flex: 1 1 auto;
+  min-height: 200px;
+}
+.deadlines-empty--inline {
+  padding: var(--spacing-16);
+}
+.deadlines-empty p { margin: 0; }
+
+/* ---- Permission note ------------------------------------------------ */
+.deadlines-permission-note {
+  margin-top: var(--spacing-8);
+  padding: var(--spacing-8) var(--spacing-12);
+  border-left: 3px solid var(--color-sf-border-secondary);
+  background: var(--color-sf-bg-secondary-subtle);
+  color: var(--app-text-secondary);
+  font-size: var(--font-size-sm);
+  border-radius: 0 var(--radius-6) var(--radius-6) 0;
+}
+
+/* ---- Quick Info Dialog (opens when ListView / calendar event is clicked) -- */
+.e-dialog.deadlines-quickinfo.e-popup,
+.e-dialog.deadlines-quickinfo {
+  border: 1px solid var(--color-sf-border-secondary) !important;
+  border-radius: var(--modal-lg-radius, var(--radius-12)) !important;
+  background: var(--color-sf-bg-primary) !important;
+  box-shadow: var(--shadow-xl) !important;
+  overflow: hidden;
+  max-width: min(440px, calc(100vw - var(--spacing-32))) !important;
+}
+
+/* Kill Syncfusion indigo dialog chrome — use BDS surfaces only */
+.e-dialog.deadlines-quickinfo .e-dlg-header-content {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: var(--spacing-12) !important;
+  padding: var(--spacing-16) var(--spacing-20) !important;
+  border-bottom: 1px solid var(--color-sf-border-secondary) !important;
+  background: var(--color-sf-bg-secondary) !important;
+  border-radius: 0 !important;
+}
+
+.e-dialog.deadlines-quickinfo .e-dlg-header {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: var(--font-size-lg) !important;
+  font-weight: var(--font-weight-semibold) !important;
+  line-height: var(--line-height-lg) !important;
+  color: var(--app-text-primary) !important;
+  white-space: normal !important;
+  word-break: break-word;
+}
+
+.e-dialog.deadlines-quickinfo .e-dlg-header-content .e-btn.e-dlg-closeicon-btn {
+  flex-shrink: 0;
+  width: var(--spacing-32) !important;
+  height: var(--spacing-32) !important;
+  min-width: var(--spacing-32) !important;
+  min-height: var(--spacing-32) !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: var(--radius-6) !important;
+  background: transparent !important;
+  color: var(--app-text-secondary) !important;
+  box-shadow: none !important;
+}
+
+.e-dialog.deadlines-quickinfo .e-dlg-header-content .e-btn.e-dlg-closeicon-btn:hover,
+.e-dialog.deadlines-quickinfo .e-dlg-header-content .e-btn.e-dlg-closeicon-btn:focus {
+  background: var(--color-sf-bg-primary-hover) !important;
+  color: var(--app-text-primary) !important;
+}
+
+.e-dialog.deadlines-quickinfo .e-icon-dlg-close {
+  color: inherit !important;
+}
+
+.e-dialog.deadlines-quickinfo .e-dlg-content {
+  padding: var(--spacing-20) !important;
+  background: var(--color-sf-bg-primary) !important;
+  color: var(--app-text-primary) !important;
+}
+
+.e-dialog.deadlines-quickinfo .e-footer-content {
+  display: none !important;
+}
+
+/* Overlay only while this dialog is open — Syncfusion uses sibling overlay */
+.e-dlg-container:has(.deadlines-quickinfo) {
+  z-index: 1001;
+}
+.e-dlg-container:has(.deadlines-quickinfo) + .e-dlg-overlay,
+.e-dlg-overlay {
+  background: var(--color-sf-bg-overlay) !important;
+  z-index: 1000;
+}
+
+.deadlines-quickinfo__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+  min-width: 0;
+}
+
+.deadlines-quickinfo__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-16);
+  min-width: 0;
+}
+
+.deadlines-quickinfo__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  min-width: 0;
+}
+
+.deadlines-quickinfo__field--full {
+  grid-column: 1 / -1;
+}
+
+.deadlines-quickinfo__label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-xs);
+  color: var(--app-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+}
+
+.deadlines-quickinfo__value {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-sm);
+  color: var(--app-text-primary);
+  word-break: break-word;
+}
+
+/* Dedicated type chip for the dialog (not the legend chip) */
+.deadlines-quickinfo__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  width: max-content;
+  max-width: 100%;
+  padding: var(--spacing-4) var(--spacing-10);
+  border-radius: var(--chip-radius, var(--radius-6));
+  border: 1px solid var(--color-sf-border-secondary);
+  border-left-width: 3px;
+  background: var(--color-sf-bg-secondary);
+  color: var(--app-text-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-xs);
+  white-space: nowrap;
+}
+
+.deadlines-quickinfo__chip .e-icons {
+  font-size: var(--font-size-sm);
+  color: currentColor;
+  flex-shrink: 0;
+}
+
+.deadlines-quickinfo__status {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-sm);
+}
+
+.deadlines-quickinfo__notes {
+  margin: 0;
+  padding: var(--spacing-12);
+  border-radius: var(--radius-8);
+  background: var(--color-sf-bg-secondary);
+  border: 1px solid var(--color-sf-border-secondary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+  color: var(--app-text-primary);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.deadlines-quickinfo__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  padding-top: var(--spacing-16);
+  border-top: 1px solid var(--color-sf-border-secondary);
+}
+
+.deadlines-quickinfo__actions .e-btn {
+  border-radius: var(--btn-radius, var(--radius-8)) !important;
+  font-size: var(--font-size-sm) !important;
+  height: var(--spacing-32) !important;
+}
+
+.deadlines-quickinfo__actions .e-btn.e-primary {
+  background: var(--color-sf-bg-brand-solid) !important;
+  border-color: var(--color-sf-border-brand-solid) !important;
+  color: var(--color-sf-fg-on-brand-primary) !important;
+}
+
+.deadlines-quickinfo__actions .e-btn.e-outline {
+  background: var(--color-sf-bg-primary) !important;
+  border: 1px solid var(--color-sf-border-primary) !important;
+  color: var(--app-text-primary) !important;
+}
+
+.deadlines-quickinfo__actions .e-btn.e-outline:hover:not(:disabled) {
+  background: var(--color-sf-bg-primary-hover) !important;
+}
+
+.deadlines-quickinfo__actions .e-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Popup chrome only — width comes from popupWidth="100%" (relative to input). */
+.e-popup.e-multi-select-list-wrapper.deadlines-filter-input,
+.e-popup.e-multi-select-list-wrapper.e-ddl.deadlines-filter-input {
+  overflow: hidden;
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--flyout-radius, var(--radius-8));
+  background: var(--color-sf-bg-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.e-popup.e-multi-select-list-wrapper.deadlines-filter-input .e-content,
+.e-popup.e-multi-select-list-wrapper.deadlines-filter-input .e-list-parent,
+.e-popup.e-multi-select-list-wrapper.deadlines-filter-input .e-dropdownbase {
+  background: var(--color-sf-bg-primary);
+  border: none;
+}
+
+.e-popup.e-multi-select-list-wrapper.deadlines-filter-input .e-list-item {
+  box-sizing: border-box;
+  color: var(--app-text-primary) !important;
+  font-size: var(--font-size-sm) !important;
+  line-height: var(--line-height-sm) !important;
+  padding: var(--spacing-8) var(--spacing-12) !important;
+  margin: 0 var(--spacing-4) !important;
+  border-radius: var(--list-hover-radius, var(--radius-6)) !important;
+  height: auto !important;
+  min-height: var(--spacing-32) !important;
+  background: transparent !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.e-popup.e-multi-select-list-wrapper.deadlines-filter-input .e-list-item:hover,
+.e-popup.e-multi-select-list-wrapper.deadlines-filter-input .e-list-item.e-hover {
+  background: var(--color-sf-bg-primary-hover) !important;
+  color: var(--app-text-primary) !important;
+}
+
+.e-popup.e-multi-select-list-wrapper.deadlines-filter-input .e-list-item.e-active {
+  background: var(--color-sf-bg-brand-primary) !important;
+  color: var(--color-sf-fg-brand-primary) !important;
+}
+
+.e-popup.e-multi-select-list-wrapper.deadlines-filter-input .e-checkbox-wrapper .e-frame {
+  border-color: var(--color-sf-border-primary) !important;
+  border-radius: var(--checkbox-md-radius, var(--radius-4)) !important;
+  background: var(--color-sf-bg-primary) !important;
+}
+
+.e-popup.e-multi-select-list-wrapper.deadlines-filter-input .e-checkbox-wrapper .e-frame.e-check {
+  background: var(--color-sf-bg-brand-solid) !important;
+  border-color: var(--color-sf-border-brand-solid) !important;
+  color: var(--color-sf-fg-on-brand-primary) !important;
+}
+
+.e-popup.e-multi-select-list-wrapper.deadlines-filter-input .e-selectall-parent {
+  border-bottom: 1px solid var(--color-sf-border-secondary) !important;
+  background: var(--color-sf-bg-secondary) !important;
+  color: var(--app-text-secondary) !important;
+  padding: var(--spacing-8) var(--spacing-12) !important;
+  font-size: var(--font-size-sm) !important;
+  box-sizing: border-box !important;
+}
+
+/* MultiSelect input chrome on the filter row */
+.deadlines-filter-field .e-multiselect.deadlines-filter-input,
+.deadlines-filter-field .e-control-wrapper.deadlines-filter-input,
+.deadlines-filter-field .e-multi-select-wrapper {
+  border-radius: var(--input-radius, var(--radius-6));
+  border-color: var(--color-sf-border-secondary);
+  background: var(--color-sf-bg-primary);
+}
+
+.deadlines-filter-field .e-multi-select-wrapper .e-delim-values,
+.deadlines-filter-field .e-multi-select-wrapper input.e-dropdownbase {
+  color: var(--app-text-primary) !important;
+  font-size: var(--font-size-sm) !important;
+  /* line-height: 38px !important; */
+}
+
+/* Vertically center the delim text and input inside the 40px wrapper */
+.deadlines-filter-field .e-multi-select-wrapper .e-delim-values {
+  padding-left: var(--spacing-12);
+  padding-right: var(--spacing-4);
+}
+
+/* Keep chip rows vertically aligned inside the taller wrapper */
+.deadlines-filter-field .e-multi-select-wrapper .e-chips {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  background: var(--color-sf-bg-brand-primary) !important;
+  color: var(--color-sf-fg-brand-primary) !important;
+  border: 1px solid var(--color-sf-border-brand) !important;
+  border-radius: var(--chip-radius, var(--radius-6)) !important;
+  font-size: var(--font-size-xs) !important;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- Inline deadline links (matter/contract) ----------------------- */
+.deadlines-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--color-sf-fg-brand-primary);
+  cursor: pointer;
+  text-decoration: underline;
+}
+.deadlines-link:hover {
+  color: var(--color-sf-brand-solid-primary-hover);
+}
+
+/* ---- Status badge tones -------------------------------------------- */
+.deadline-status--overdue   { color: var(--color-sf-fg-error-primary); font-weight: var(--font-weight-semibold); }
+.deadline-status--duesoon  { color: var(--color-sf-fg-warning-primary); font-weight: var(--font-weight-semibold); }
+.deadline-status--upcoming { color: var(--color-sf-fg-tertiary); }
+.deadline-status--completed { color: var(--color-sf-fg-success-primary); }
+.deadline-status--waived   { color: var(--app-text-secondary); }
+
+/* ---- Toast --------------------------------------------------------- */
+.deadlines-toast {
+  border-radius: var(--radius-6) !important;
+}
+
+/* ---- Chip-style buttons (session changes / reset filters) ---------- */
+.deadlines-session-chip,
+.deadlines-reset-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  padding: var(--spacing-4) var(--spacing-12);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-sf-border-secondary);
+  background: var(--color-sf-bg-secondary);
+  color: var(--app-text-primary);
+  font-size: var(--font-size-xs);
+  font: inherit;
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.deadlines-session-chip:hover,
+.deadlines-reset-chip:hover {
+  background: var(--color-sf-bg-secondary-hover);
+}
+.deadlines-session-chip .e-icons,
+.deadlines-reset-chip .e-icons {
+  font-size: var(--font-size-xs);
+}
+
+/* ---- Responsive: KPI strip wrap ------------------------------------ */
+@media (max-width: 768px) {
+  .deadlines-kpi-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .deadlines-docket {
+    max-height: 360px;
+  }
+
+  .deadlines-quickinfo__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .e-dialog.deadlines-quickinfo {
+    width: calc(100vw - var(--spacing-24)) !important;
+    max-width: calc(100vw - var(--spacing-24)) !important;
+  }
+}

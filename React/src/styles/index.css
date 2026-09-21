@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-base);
+  color: var(--app-text-primary);
+  background-color: var(--app-background);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text-primary);
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+a {
+  color: var(--app-brand);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--app-brand-hover);
+}
+
+a:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring2);
+  border-radius: var(--radius-2);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* Focus-visible ring for all interactive elements */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring2);
+}
+
+/* Scrollbar styling using BDS neutral palette */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-sf-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-sf-gray-300);
+  border-radius: var(--radius-4);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-sf-gray-400);
+}
+
+/* Selection color */
+::selection {
+  background: var(--color-sf-brand-100);
+  color: var(--color-sf-brand-900);
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Responsive typography adjustments */
+@media (max-width: 480px) {
+  html, body, #root {
+    font-size: var(--font-size-xs);
+  }
+}

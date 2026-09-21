@@ -1,0 +1,465 @@
+/* Document repository page. */
+
+.documents-page {
+  position: relative;
+}
+
+.documents-page .panel-body--inline-alert {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.documents-matter-select {
+  min-width: 320px;
+  width: 320px;
+  max-width: 100%;
+}
+
+.documents-matter-select .e-control-wrapper,
+.documents-matter-select .e-ddl {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.e-popup.e-ddl.documents-matter-input .e-list-item {
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.documents-empty-body {
+  padding: var(--spacing-24);
+}
+
+.documents-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: var(--spacing-20);
+  padding: var(--spacing-20);
+  margin-bottom: 0;
+}
+
+.documents-file-manager {
+  min-width: 0;
+  border-radius: var(--card-sm-radius);
+  overflow: hidden;
+  border: 1px solid var(--color-sf-border-secondary);
+  background: var(--app-surface);
+}
+
+.documents-file-manager .e-filemanager {
+  border: none;
+  border-radius: var(--card-sm-radius);
+}
+
+/* Hint panel (right column) */
+.documents-hint {
+  display: flex;
+  align-items: stretch;
+}
+
+.documents-hint-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding: var(--spacing-20);
+  background: var(--color-sf-bg-secondary);
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--card-sm-radius);
+  width: 100%;
+}
+
+.documents-hint-icon {
+  font-size: var(--font-size-2xl);
+  line-height: 1;
+}
+
+.documents-hint-card h3 {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text-primary);
+  margin: 0;
+}
+
+.documents-hint-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-10);
+}
+
+.documents-hint-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-8);
+  font-size: var(--font-size-xs);
+  color: var(--app-text-secondary);
+  line-height: var(--line-height-sm);
+}
+
+.documents-hint-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--spacing-40);
+  padding: var(--spacing-2) var(--spacing-8);
+  border-radius: var(--radius-4);
+  font-size: var(--font-size-xxs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+  flex-shrink: 0;
+  margin-top: var(--spacing-1);
+}
+
+.documents-hint-tag-pdf {
+  background: var(--color-sf-error-50);
+  color: var(--color-sf-error-700);
+  border: 1px solid var(--color-sf-error-200);
+}
+
+.documents-hint-tag-docx {
+  background: var(--color-sf-brand-50);
+  color: var(--color-sf-brand-700);
+  border: 1px solid var(--color-sf-brand-200);
+}
+
+/* ---- Document Preview Dialog (PDF Viewer + Document Editor) ---- */
+.doc-preview-dialog.e-dialog {
+  max-height: 92vh;
+  height: 92vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.doc-preview-dialog .e-dlg-header-content {
+  flex: 0 0 auto;
+  padding: var(--spacing-12) var(--spacing-16);
+}
+
+.doc-preview-dialog .e-dlg-header {
+  font-size: var(--font-size-base) !important;
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+.doc-preview-dialog .e-dlg-content {
+  padding: 0;
+  background: var(--app-surface);
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.doc-preview-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+
+.doc-preview-chrome {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-12);
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  padding: var(--spacing-8) var(--spacing-16);
+  border-bottom: 1px solid var(--color-sf-border-secondary);
+  background: var(--color-sf-bg-secondary);
+}
+
+.doc-preview-chrome-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  min-width: 0;
+}
+
+.doc-preview-chrome-text {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-sm);
+  color: var(--app-text-primary);
+}
+
+.doc-preview-chrome-muted {
+  font-size: var(--font-size-xs);
+  color: var(--app-text-tertiary);
+}
+
+.doc-preview-chrome-nowrap {
+  white-space: nowrap;
+}
+
+.doc-preview-chrome-sep {
+  color: var(--app-text-tertiary);
+  font-size: var(--font-size-xs);
+  line-height: 1;
+  user-select: none;
+}
+
+.doc-preview-chrome .status-badge {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
+.doc-preview-meta-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--font-size-xs);
+  color: var(--app-brand);
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.doc-preview-meta-link:hover {
+  text-decoration: underline;
+  font-weight: var(--font-weight-semibold);
+}
+
+.doc-preview-meta-link:focus-visible {
+  outline: none;
+  text-decoration: underline;
+  box-shadow: var(--ring-brand);
+  border-radius: var(--radius-2);
+}
+
+.doc-preview-viewer {
+  flex: 1 1 auto;
+  min-height: 0;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  background: var(--app-surface);
+}
+
+/* PDF Viewer fills the dialog. Do not size inner nodes via [id^='standalone-pdf-viewer']. */
+.doc-preview-viewer .e-pdfviewer {
+  height: 100%;
+  width: 100%;
+}
+
+.doc-preview-viewer .e-pv-viewer-container,
+.doc-preview-viewer .e-pv-main-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* Document Editor fills the dialog. Do not size inner nodes via [id^='docx-editor']. */
+.doc-preview-docx {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.doc-preview-docx .e-documenteditorcontainer {
+  height: 100%;
+  width: 100%;
+  border: none;
+}
+
+.doc-preview-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: var(--spacing-16);
+  background: color-mix(in srgb, var(--app-surface) 92%, transparent);
+  pointer-events: none;
+}
+
+.doc-preview-loading p {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--app-text-secondary);
+}
+
+.doc-preview-error {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-10);
+  padding: var(--spacing-12) var(--spacing-16);
+  background: var(--color-sf-error-50);
+  color: var(--color-sf-error-700);
+  border-bottom: 1px solid var(--color-sf-error-200);
+  font-size: var(--font-size-xs);
+}
+
+/* ---- Inline toast for preview actions ---- */
+.documents-toast {
+  position: fixed;
+  bottom: var(--spacing-24);
+  right: var(--spacing-24);
+  background: var(--color-sf-gray-900);
+  color: var(--color-sf-base-white);
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-4);
+  box-shadow: var(--shadow-lg);
+  font-size: var(--font-size-xs);
+  z-index: 1100;
+}
+
+/* ---- KPI strip (Documents page) ---- */
+.documents-kpi-strip {
+  margin-bottom: var(--spacing-16);
+}
+
+/* ---- Document Context panel (right sidebar, replaces static hint) ---- */
+.documents-context-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding: var(--spacing-20);
+  background: var(--color-sf-bg-secondary);
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--card-sm-radius);
+  width: 100%;
+}
+
+.documents-context-title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text-primary);
+  margin: 0;
+  word-break: break-word;
+}
+
+.documents-context-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.documents-context-label {
+  font-size: var(--font-size-xxs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+  color: var(--app-text-tertiary);
+}
+
+.documents-context-value {
+  font-size: var(--font-size-xs);
+  color: var(--app-text-primary);
+  line-height: var(--line-height-sm);
+}
+
+.documents-context-muted {
+  color: var(--app-text-tertiary);
+  font-size: var(--font-size-xxs);
+}
+
+.documents-context-description {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.documents-context-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--font-size-xs);
+  color: var(--app-brand);
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+}
+
+.documents-context-link:hover,
+.documents-context-link:focus-visible {
+  text-decoration: underline;
+  outline: 2px solid var(--app-brand);
+  outline-offset: 2px;
+}
+
+.documents-context-deadlines {
+  margin-top: var(--spacing-4);
+}
+
+.documents-context-deadline-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.documents-context-deadline-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--spacing-8);
+  font-size: var(--font-size-xs);
+}
+
+.documents-context-deadline-date {
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text-primary);
+  white-space: nowrap;
+}
+
+.documents-context-deadline-title {
+  color: var(--app-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.documents-context-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  margin-top: var(--spacing-8);
+  padding-top: var(--spacing-12);
+  border-top: 1px solid var(--color-sf-border-secondary);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 1200px) {
+  .documents-layout {
+    grid-template-columns: 1fr;
+  }
+  .documents-hint,
+  .documents-context-panel {
+    order: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .documents-file-manager {
+    height: 480px;
+  }
+  /* Stack the KPI strip to one column below 768px. */
+  .documents-kpi-strip.kpi-cards {
+    grid-template-columns: 1fr;
+  }
+  .doc-preview-chrome {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-8);
+  }
+  /* Context deadline items drop the date column to free title room. */
+  .documents-context-deadline-item {
+    grid-template-columns: 1fr auto;
+  }
+  .documents-context-deadline-date {
+    grid-column: 1 / -1;
+  }
+}

@@ -1,0 +1,549 @@
+/* Design tokens. */
+
+/* ---------- Primitive Colors ---------- */
+:root {
+  --color-sf-gray-25:  #FCFCFD;
+  --color-sf-gray-50:  #F9FAFB;
+  --color-sf-gray-100: #F2F4F7;
+  --color-sf-gray-200: #EAECF0;
+  --color-sf-gray-300: #D0D5DD;
+  --color-sf-gray-400: #98A1B2;
+  --color-sf-gray-500: #667085;
+  --color-sf-gray-600: #475467;
+  --color-sf-gray-700: #344054;
+  --color-sf-gray-800: #18212F;
+  --color-sf-gray-900: #101828;
+  --color-sf-gray-950: #0C111D;
+
+  --color-sf-base-white: #FFFFFF;
+  --color-sf-base-black: #000000;
+  --color-sf-base-transparent: transparent;
+
+  --color-sf-brand-25:  #FCFAFF;
+  --color-sf-brand-50:  #F9F5FF;
+  --color-sf-brand-100: #F4EBFF;
+  --color-sf-brand-200: #E9D7FE;
+  --color-sf-brand-300: #D6BBFB;
+  --color-sf-brand-400: #B692F6;
+  --color-sf-brand-500: #9D76ED;
+  --color-sf-brand-600: #7E56D8;
+  --color-sf-brand-700: #6840C6;
+  --color-sf-brand-800: #52379E;
+  --color-sf-brand-900: #422F7D;
+  --color-sf-brand-950: #2B1B5E;
+
+  --color-sf-error-25:  #FEFAFA;
+  --color-sf-error-50:  #FEF2F1;
+  --color-sf-error-100: #FEE3E1;
+  --color-sf-error-200: #FECDC9;
+  --color-sf-error-300: #FCA19B;
+  --color-sf-error-400: #F97066;
+  --color-sf-error-500: #F04437;
+  --color-sf-error-600: #D92C20;
+  --color-sf-error-700: #B32218;
+  --color-sf-error-800: #901F17;
+  --color-sf-error-900: #7A2619;
+  --color-sf-error-950: #54150C;
+
+  --color-sf-warning-25:  #FFFCF4;
+  --color-sf-warning-50:  #FFF9EB;
+  --color-sf-warning-100: #FEEFC6;
+  --color-sf-warning-200: #FEDE88;
+  --color-sf-warning-300: #FEC84A;
+  --color-sf-warning-400: #FCB022;
+  --color-sf-warning-500: #F78F08;
+  --color-sf-warning-600: #DB6803;
+  --color-sf-warning-700: #B54707;
+  --color-sf-warning-800: #93370C;
+  --color-sf-warning-900: #792D0D;
+  --color-sf-warning-950: #4E1D08;
+
+  --color-sf-success-25:  #F5FDF9;
+  --color-sf-success-50:  #ECFCF2;
+  --color-sf-success-100: #DBF9E6;
+  --color-sf-success-200: #AAEFC6;
+  --color-sf-success-300: #75DFA6;
+  --color-sf-success-400: #47CD89;
+  --color-sf-success-500: #17B169;
+  --color-sf-success-600: #069454;
+  --color-sf-success-700: #057647;
+  --color-sf-success-800: #075D39;
+  --color-sf-success-900: #074C30;
+  --color-sf-success-950: #043320;
+
+  --color-sf-cyan-25:  #F5FEFF;
+  --color-sf-cyan-50:  #ECFDFF;
+  --color-sf-cyan-100: #CFF9FE;
+  --color-sf-cyan-200: #A5F0FC;
+  --color-sf-cyan-300: #67E3F9;
+  --color-sf-cyan-400: #22CCEE;
+  --color-sf-cyan-500: #06AEDA;
+  --color-sf-cyan-600: #088AB2;
+  --color-sf-cyan-700: #0E7090;
+  --color-sf-cyan-800: #155B75;
+  --color-sf-cyan-900: #164C63;
+  --color-sf-cyan-950: #0D2D3A;
+}
+
+/* ---------- Semantic Tokens (Light Theme) ---------- */
+:root {
+  /* Brand */
+  --color-sf-brand-primary: var(--color-sf-brand-600);
+  --color-sf-on-brand-solid-primary: var(--color-sf-base-white);
+  --color-sf-brand-solid-primary: var(--color-sf-brand-600);
+  --color-sf-brand-solid-primary-hover: var(--color-sf-brand-700);
+  --color-sf-brand-solid-primary-pressed: var(--color-sf-brand-800);
+
+  /* Background */
+  --color-sf-bg-primary: var(--color-sf-base-white);
+  --color-sf-bg-primary-alt: var(--color-sf-base-white);
+  --color-sf-bg-primary-hover: var(--color-sf-gray-50);
+  --color-sf-bg-secondary: var(--color-sf-gray-50);
+  --color-sf-bg-secondary-alt: var(--color-sf-gray-50);
+  --color-sf-bg-secondary-hover: var(--color-sf-gray-100);
+  --color-sf-bg-secondary-subtle: var(--color-sf-gray-25);
+  --color-sf-bg-tertiary: var(--color-sf-gray-100);
+  --color-sf-bg-quaternary: var(--color-sf-gray-200);
+  --color-sf-bg-active: var(--color-sf-gray-50);
+  --color-sf-bg-disabled: var(--color-sf-gray-100);
+  --color-sf-bg-disabled-subtle: var(--color-sf-gray-50);
+  --color-sf-bg-overlay: rgba(16, 24, 40, 0.7);
+  --color-sf-bg-brand-primary: var(--color-sf-brand-50);
+  --color-sf-bg-brand-secondary: var(--color-sf-brand-100);
+  --color-sf-bg-brand-solid: var(--color-sf-brand-600);
+  --color-sf-bg-brand-solid-hover: var(--color-sf-brand-700);
+  --color-sf-bg-error-primary: var(--color-sf-error-50);
+  --color-sf-bg-error-secondary: var(--color-sf-error-100);
+  --color-sf-bg-error-solid: var(--color-sf-error-600);
+  --color-sf-bg-warning-primary: var(--color-sf-warning-50);
+  --color-sf-bg-warning-secondary: var(--color-sf-warning-100);
+  --color-sf-bg-warning-solid: var(--color-sf-warning-600);
+  --color-sf-bg-success-primary: var(--color-sf-success-50);
+  --color-sf-bg-success-secondary: var(--color-sf-success-100);
+  --color-sf-bg-success-solid: var(--color-sf-success-600);
+
+  /* Border */
+  --color-sf-border-primary: var(--color-sf-gray-300);
+  --color-sf-border-primary-alt: var(--color-sf-gray-400);
+  --color-sf-border-secondary: var(--color-sf-gray-200);
+  --color-sf-border-tertiary: var(--color-sf-gray-100);
+  --color-sf-border-disabled: var(--color-sf-gray-300);
+  --color-sf-border-brand: var(--color-sf-brand-300);
+  --color-sf-border-brand-solid: var(--color-sf-brand-600);
+  --color-sf-border-error: var(--color-sf-error-300);
+  --color-sf-border-error-solid: var(--color-sf-error-600);
+  --color-sf-border-success: var(--color-sf-success-400);
+  --color-sf-border-warning: var(--color-sf-warning-300);
+  --color-sf-border-info: var(--color-sf-cyan-300);
+
+  /* Foreground / Text */
+  --color-sf-fg-primary: var(--color-sf-gray-900);
+  --color-sf-fg-secondary: var(--color-sf-gray-700);
+  --color-sf-fg-secondary-hover: var(--color-sf-gray-800);
+  --color-sf-fg-tertiary: var(--color-sf-gray-600);
+  --color-sf-fg-tertiary-hover: var(--color-sf-gray-700);
+  --color-sf-fg-quaternary: var(--color-sf-gray-500);
+  --color-sf-fg-quaternary-hover: var(--color-sf-gray-600);
+  --color-sf-fg-quinary: var(--color-sf-gray-400);
+  --color-sf-fg-quinary-hover: var(--color-sf-gray-500);
+  --color-sf-fg-senary: var(--color-sf-gray-300);
+  --color-sf-fg-on-brand-primary: var(--color-sf-base-white);
+  --color-sf-fg-on-brand-secondary: var(--color-sf-gray-200);
+  --color-sf-fg-on-brand-tertiary: var(--color-sf-gray-200);
+  --color-sf-fg-disabled: var(--color-sf-gray-500);
+  --color-sf-fg-disabled-subtle: var(--color-sf-gray-300);
+  --color-sf-fg-placeholder: var(--color-sf-gray-500);
+  --color-sf-fg-placeholder-subtle: var(--color-sf-gray-300);
+  --color-sf-fg-brand-primary: var(--color-sf-brand-600);
+  --color-sf-fg-brand-secondary: var(--color-sf-brand-500);
+  --color-sf-fg-error-primary: var(--color-sf-error-600);
+  --color-sf-fg-warning-primary: var(--color-sf-warning-600);
+  --color-sf-fg-success-primary: var(--color-sf-success-600);
+
+  /* Shadows */
+  --shadow-none: 0px 0px 0px rgba(0, 0, 0, 0);
+  --shadow-sm: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-default: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0px 10px 15px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0px 20px 25px rgba(0, 0, 0, 0.1), 0px 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-focus-ring1: 0px 0px 0px 1px rgba(158, 119, 237, 1);
+  --shadow-focus-ring2: 0px 0px 0px 2px rgba(255, 255, 255, 1), 0px 0px 0px 4px rgba(127, 86, 217, 1);
+  --ring-brand: 0px 0px 0px 4px rgba(158, 119, 237, 0.24);
+  --ring-error: 0px 0px 0px 4px rgba(240, 68, 56, 0.24);
+  --ring-success: 0px 0px 0px 4px rgba(8, 116, 67, 0.24);
+  --ring-warning: 0px 0px 0px 4px rgba(194, 65, 12, 0.24);
+  --ring-info: 0px 0px 0px 4px rgba(6, 214, 212, 0.24);
+}
+
+/* ---------- Spacing scale ---------- */
+:root {
+  --spacing-0: 0px;
+  --spacing-1: 1px;
+  --spacing-2: 2px;
+  --spacing-3: 3px;
+  --spacing-4: 4px;
+  --spacing-5: 5px;
+  --spacing-6: 6px;
+  --spacing-7: 7px;
+  --spacing-8: 8px;
+  --spacing-9: 9px;
+  --spacing-10: 10px;
+  --spacing-11: 11px;
+  --spacing-12: 12px;
+  --spacing-13: 13px;
+  --spacing-14: 14px;
+  --spacing-15: 15px;
+  --spacing-16: 16px;
+  --spacing-18: 18px;
+  --spacing-20: 20px;
+  --spacing-22: 22px;
+  --spacing-24: 24px;
+  --spacing-28: 28px;
+  --spacing-30: 30px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-56: 56px;
+  --spacing-72: 72px;
+}
+
+/* ---------- Typography Scale ---------- */
+:root {
+  --font-size-xxs: 10px;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 30px;
+  --font-size-4xl: 36px;
+  --font-size-5xl: 48px;
+  --font-size-6xl: 60px;
+  --font-size-7xl: 72px;
+  --font-size-8xl: 96px;
+  --font-size-9xl: 128px;
+
+  --line-height-xxs: 14px;
+  --line-height-xs: 16px;
+  --line-height-sm: 20px;
+  --line-height-base: 24px;
+  --line-height-lg: 28px;
+  --line-height-2xl: 32px;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --letter-spacing-normal: 0px;
+  --letter-spacing-wide: 0.1px;
+  --letter-spacing-wider: 0.25px;
+}
+
+/* ---------- Border Radius ---------- */
+:root {
+  --radius-0: 0px;
+  --radius-2: 2px;
+  --radius-4: 4px;
+  --radius-6: 6px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-14: 14px;
+  --radius-16: 16px;
+  --radius-20: 20px;
+  --radius-24: 24px;
+  --radius-28: 28px;
+  --radius-full: 1000px;
+
+  /* Component radii */
+  --btn-radius: var(--radius-8);
+  --input-radius: var(--radius-6);
+  --card-sm-radius: var(--radius-8);
+  --card-md-radius: var(--radius-12);
+  --card-lg-radius: var(--radius-12);
+  --modal-sm-radius: var(--radius-8);
+  --modal-lg-radius: var(--radius-12);
+  --tooltip-radius: var(--radius-6);
+  --toast-radius: var(--radius-8);
+  --chip-radius: var(--radius-6);
+  --flyout-radius: var(--radius-8);
+  --list-hover-radius: var(--radius-6);
+  --control-radius: var(--radius-6);
+  --pill-radius: var(--radius-full);
+  --checkbox-md-radius: var(--radius-4);
+  --flyout-radius: var(--radius-8);
+}
+
+/* ---------- Layout Variables ---------- */
+:root {
+  --sidebar-width: 260px;
+  --header-height: 64px;
+  --page-max-width: 1440px;
+  --page-padding: var(--spacing-24);
+}
+
+/* ---------- App-specific Semantic Tokens ---------- */
+:root {
+  /* Surface colors */
+  --app-surface: var(--color-sf-bg-primary);
+  --app-background: var(--color-sf-bg-secondary);
+  /* Sidebar light surface. */
+  --app-sidebar-bg: var(--color-sf-bg-primary);
+  --app-sidebar-text: var(--color-sf-fg-secondary);
+  --app-sidebar-text-hover: var(--color-sf-fg-primary);
+  --app-sidebar-active-bg: var(--color-sf-bg-brand-primary);
+  --app-sidebar-active-border: var(--app-brand);
+  /* Text */
+  --app-text-primary: var(--color-sf-fg-primary);
+  --app-text-secondary: var(--color-sf-fg-secondary);
+  --app-text-tertiary: var(--color-sf-fg-tertiary);
+  --app-text-disabled: var(--color-sf-fg-disabled);
+
+  /* Branding */
+  --app-brand: var(--color-sf-brand-600);
+  --app-brand-hover: var(--color-sf-brand-700);
+  --app-brand-pressed: var(--color-sf-brand-800);
+  --app-brand-light: var(--color-sf-brand-50);
+
+  /* Status / Semantic backgrounds and text */
+  --app-status-open-bg: var(--color-sf-success-50);
+  --app-status-open-text: var(--color-sf-success-700);
+  --app-status-in-progress-bg: var(--color-sf-cyan-50);
+  --app-status-in-progress-text: var(--color-sf-cyan-700);
+  --app-status-review-bg: var(--color-sf-brand-50);
+  --app-status-review-text: var(--color-sf-brand-700);
+  --app-status-pending-bg: var(--color-sf-warning-50);
+  --app-status-pending-text: var(--color-sf-warning-700);
+  --app-status-closed-bg: var(--color-sf-gray-100);
+  --app-status-closed-text: var(--color-sf-gray-700);
+  --app-status-on-hold-bg: var(--color-sf-gray-50);
+  --app-status-on-hold-text: var(--color-sf-gray-600);
+  --app-status-expired-bg: var(--color-sf-error-50);
+  --app-status-expired-text: var(--color-sf-error-700);
+  --app-status-terminated-bg: var(--color-sf-gray-100);
+  --app-status-terminated-text: var(--color-sf-gray-700);
+  --app-status-signed-bg: var(--color-sf-brand-50);
+  --app-status-signed-text: var(--color-sf-brand-700);
+  --app-status-draft-bg: var(--color-sf-warning-50);
+  --app-status-draft-text: var(--color-sf-warning-700);
+  --app-status-active-bg: var(--color-sf-success-50);
+  --app-status-active-text: var(--color-sf-success-700);
+  --app-status-completed-bg: var(--color-sf-success-50);
+  --app-status-completed-text: var(--color-sf-success-700);
+  --app-status-overdue-bg: var(--color-sf-error-50);
+  --app-status-overdue-text: var(--color-sf-error-700);
+  --app-status-upcoming-bg: var(--color-sf-cyan-50);
+  --app-status-upcoming-text: var(--color-sf-cyan-700);
+  --app-status-settled-bg: var(--color-sf-success-50);
+  --app-status-settled-text: var(--color-sf-success-700);
+  --app-status-dismissed-bg: var(--color-sf-gray-100);
+  --app-status-dismissed-text: var(--color-sf-gray-700);
+  --app-status-final-bg: var(--color-sf-success-50);
+  --app-status-final-text: var(--color-sf-success-700);
+  --app-status-archived-bg: var(--color-sf-gray-100);
+  --app-status-archived-text: var(--color-sf-gray-700);
+  --app-status-approved-bg: var(--color-sf-success-50);
+  --app-status-approved-text: var(--color-sf-success-700);
+  --app-status-escalated-bg: var(--color-sf-error-50);
+  --app-status-escalated-text: var(--color-sf-error-700);
+  --app-status-expiring-soon-bg: var(--color-sf-warning-50);
+  --app-status-expiring-soon-text: var(--color-sf-warning-700);
+
+  /* Priority */
+  --app-priority-critical-text: var(--color-sf-error-600);
+  --app-priority-high-text: var(--color-sf-warning-600);
+  --app-priority-medium-text: var(--color-sf-cyan-600);
+  --app-priority-low-text: var(--color-sf-gray-500);
+
+  /* Risk */
+  --app-risk-critical-text: var(--color-sf-error-600);
+  --app-risk-high-text: var(--color-sf-warning-600);
+  --app-risk-medium-text: var(--color-sf-cyan-600);
+  --app-risk-low-text: var(--color-sf-gray-500);
+
+  /* Severity */
+  --app-severity-critical-bg: var(--color-sf-error-50);
+  --app-severity-critical-text: var(--color-sf-error-700);
+  --app-severity-high-bg: var(--color-sf-warning-50);
+  --app-severity-high-text: var(--color-sf-warning-700);
+  --app-severity-medium-bg: var(--color-sf-cyan-50);
+  --app-severity-medium-text: var(--color-sf-cyan-700);
+  --app-severity-low-bg: var(--color-sf-gray-100);
+  --app-severity-low-text: var(--color-sf-gray-600);
+
+  /* Charts */
+  --app-chart-low: var(--color-sf-success-500);
+  --app-chart-medium: var(--color-sf-warning-500);
+  --app-chart-high: var(--color-sf-error-500);
+  --app-chart-critical: var(--color-sf-brand-500);
+  --app-chart-info: var(--color-sf-cyan-500);
+  --app-chart-neutral: var(--color-sf-gray-500);
+  --app-chart-muted: var(--color-sf-gray-400);
+
+  /* Schedule event colors — obligation types */
+  --app-schedule-payment:      var(--color-sf-success-600);
+  --app-schedule-delivery:     var(--color-sf-brand-600);
+  --app-schedule-performance:  var(--color-sf-cyan-600);
+  --app-schedule-reporting:    var(--color-sf-warning-600);
+  /* Compliance/notification colors use cyan and gray. */
+  --app-schedule-compliance:   var(--color-sf-cyan-700);
+  --app-schedule-notification: var(--color-sf-gray-700);
+  --app-schedule-approval:     var(--color-sf-success-700);
+  --app-schedule-other:        var(--color-sf-gray-600);
+  --app-schedule-completed:    var(--color-sf-gray-400);
+  --app-schedule-effective:    var(--color-sf-success-500);
+  --app-schedule-expiration:   var(--color-sf-error-500);
+
+  /* KPI icons */
+  --app-kpi-blue-bg: var(--color-sf-brand-100);
+  --app-kpi-blue-text: var(--color-sf-brand-600);
+  --app-kpi-green-bg: var(--color-sf-success-100);
+  --app-kpi-green-text: var(--color-sf-success-600);
+  --app-kpi-orange-bg: var(--color-sf-warning-100);
+  --app-kpi-orange-text: var(--color-sf-warning-600);
+  --app-kpi-red-bg: var(--color-sf-error-100);
+  --app-kpi-red-text: var(--color-sf-error-600);
+  --app-kpi-purple-bg: var(--color-sf-brand-100);
+  --app-kpi-purple-text: var(--color-sf-brand-700);
+}
+
+/* Dark theme tokens. */
+:root[data-theme='dark'] {
+  /* Brand */
+  --color-sf-brand-primary: var(--color-sf-brand-500);
+  --color-sf-on-brand-solid-primary: var(--color-sf-base-white);
+  --color-sf-brand-solid-primary: var(--color-sf-brand-600);
+  --color-sf-brand-solid-primary-hover: var(--color-sf-brand-500);
+  --color-sf-brand-solid-primary-pressed: var(--color-sf-brand-400);
+
+  /* Background */
+  --color-sf-bg-primary: var(--color-sf-gray-950);
+  --color-sf-bg-primary-alt: var(--color-sf-gray-900);
+  --color-sf-bg-primary-hover: var(--color-sf-gray-800);
+  --color-sf-bg-secondary: var(--color-sf-gray-900);
+  --color-sf-bg-secondary-alt: var(--color-sf-gray-950);
+  --color-sf-bg-secondary-hover: var(--color-sf-gray-800);
+  --color-sf-bg-secondary-subtle: var(--color-sf-gray-900);
+  --color-sf-bg-tertiary: var(--color-sf-gray-800);
+  --color-sf-bg-quaternary: var(--color-sf-gray-700);
+  --color-sf-bg-active: var(--color-sf-gray-800);
+  --color-sf-bg-disabled: var(--color-sf-gray-800);
+  --color-sf-bg-disabled-subtle: var(--color-sf-gray-900);
+  --color-sf-bg-overlay: rgba(12, 17, 29, 0.7);
+  --color-sf-bg-brand-primary: var(--color-sf-brand-950);
+  --color-sf-bg-brand-secondary: var(--color-sf-brand-900);
+  --color-sf-bg-brand-solid: var(--color-sf-brand-600);
+  --color-sf-bg-brand-solid-hover: var(--color-sf-brand-500);
+  --color-sf-bg-error-primary: var(--color-sf-error-950);
+  --color-sf-bg-error-secondary: var(--color-sf-error-900);
+  --color-sf-bg-error-solid: var(--color-sf-error-600);
+  --color-sf-bg-warning-primary: var(--color-sf-warning-950);
+  --color-sf-bg-warning-secondary: var(--color-sf-warning-900);
+  --color-sf-bg-warning-solid: var(--color-sf-warning-600);
+  --color-sf-bg-success-primary: var(--color-sf-success-950);
+  --color-sf-bg-success-secondary: var(--color-sf-success-900);
+  --color-sf-bg-success-solid: var(--color-sf-success-600);
+
+  /* Border */
+  --color-sf-border-primary: var(--color-sf-gray-700);
+  --color-sf-border-primary-alt: var(--color-sf-gray-600);
+  --color-sf-border-secondary: var(--color-sf-gray-800);
+  --color-sf-border-tertiary: var(--color-sf-gray-800);
+  --color-sf-border-disabled: var(--color-sf-gray-700);
+  --color-sf-border-disabled-subtle: var(--color-sf-gray-800);
+  --color-sf-border-brand: var(--color-sf-brand-400);
+  --color-sf-border-brand-solid: var(--color-sf-brand-500);
+  --color-sf-border-error: var(--color-sf-error-400);
+  --color-sf-border-error-solid: var(--color-sf-error-500);
+  --color-sf-border-success: var(--color-sf-success-400);
+  --color-sf-border-warning: var(--color-sf-warning-400);
+  --color-sf-border-info: var(--color-sf-cyan-400);
+
+  /* Foreground / Text */
+  --color-sf-fg-primary: var(--color-sf-gray-100);
+  --color-sf-fg-secondary: var(--color-sf-gray-300);
+  --color-sf-fg-secondary-hover: var(--color-sf-gray-200);
+  --color-sf-fg-tertiary: var(--color-sf-gray-400);
+  --color-sf-fg-tertiary-hover: var(--color-sf-gray-300);
+  --color-sf-fg-quaternary: var(--color-sf-gray-400);
+  --color-sf-fg-quaternary-hover: var(--color-sf-gray-300);
+  --color-sf-fg-quinary: var(--color-sf-gray-400);
+  --color-sf-fg-quinary-hover: var(--color-sf-gray-400);
+  --color-sf-fg-senary: var(--color-sf-gray-600);
+  --color-sf-fg-on-brand-primary: var(--color-sf-base-white);
+  --color-sf-fg-on-brand-secondary: var(--color-sf-gray-300);
+  --color-sf-fg-on-brand-tertiary: var(--color-sf-gray-400);
+  --color-sf-fg-disabled: var(--color-sf-gray-400);
+  --color-sf-fg-disabled-subtle: var(--color-sf-gray-600);
+  --color-sf-fg-placeholder: var(--color-sf-gray-400);
+  --color-sf-fg-placeholder-subtle: var(--color-sf-gray-700);
+  --color-sf-fg-brand-primary: var(--color-sf-brand-400);
+  --color-sf-fg-brand-secondary: var(--color-sf-brand-500);
+  --color-sf-fg-error-primary: var(--color-sf-error-400);
+  --color-sf-fg-warning-primary: var(--color-sf-warning-400);
+  --color-sf-fg-success-primary: var(--color-sf-success-400);
+
+  /* Shadows — deepen against dark surfaces */
+  --shadow-sm: 0px 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-default: 0px 1px 3px rgba(0, 0, 0, 0.5), 0px 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0px 4px 6px rgba(0, 0, 0, 0.5), 0px 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0px 10px 15px rgba(0, 0, 0, 0.55), 0px 4px 6px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0px 20px 25px rgba(0, 0, 0, 0.6), 0px 10px 10px rgba(0, 0, 0, 0.4);
+
+  /* ---- App-specific surfaces / text ---- */
+  --app-surface: var(--color-sf-bg-primary-alt);
+  --app-background: var(--color-sf-gray-950);
+  --app-sidebar-bg: var(--color-sf-bg-primary-alt);
+  --app-sidebar-text: var(--color-sf-fg-secondary);
+  --app-sidebar-text-hover: var(--color-sf-fg-primary);
+  --app-sidebar-active-bg: var(--color-sf-brand-950);
+  --app-text-primary: var(--color-sf-fg-primary);
+  --app-text-secondary: var(--color-sf-fg-secondary);
+  --app-text-tertiary: var(--color-sf-fg-tertiary);
+  --app-brand: var(--color-sf-brand-400);
+  --app-brand-light: var(--color-sf-brand-950);
+
+  /* Status badges — dark tint background + light text */
+  --app-status-open-bg: var(--color-sf-success-950);        --app-status-open-text: var(--color-sf-success-300);
+  --app-status-in-progress-bg: var(--color-sf-cyan-950);    --app-status-in-progress-text: var(--color-sf-cyan-300);
+  --app-status-review-bg: var(--color-sf-brand-950);        --app-status-review-text: var(--color-sf-brand-300);
+  --app-status-pending-bg: var(--color-sf-warning-950);     --app-status-pending-text: var(--color-sf-warning-300);
+  --app-status-closed-bg: var(--color-sf-gray-800);         --app-status-closed-text: var(--color-sf-gray-300);
+  --app-status-on-hold-bg: var(--color-sf-gray-800);        --app-status-on-hold-text: var(--color-sf-gray-400);
+  --app-status-expired-bg: var(--color-sf-error-950);       --app-status-expired-text: var(--color-sf-error-300);
+  --app-status-terminated-bg: var(--color-sf-gray-800);     --app-status-terminated-text: var(--color-sf-gray-300);
+  --app-status-signed-bg: var(--color-sf-brand-950);        --app-status-signed-text: var(--color-sf-brand-300);
+  --app-status-draft-bg: var(--color-sf-warning-950);       --app-status-draft-text: var(--color-sf-warning-300);
+  --app-status-active-bg: var(--color-sf-success-950);      --app-status-active-text: var(--color-sf-success-300);
+  --app-status-completed-bg: var(--color-sf-success-950);   --app-status-completed-text: var(--color-sf-success-300);
+  --app-status-overdue-bg: var(--color-sf-error-950);       --app-status-overdue-text: var(--color-sf-error-300);
+  --app-status-upcoming-bg: var(--color-sf-cyan-950);       --app-status-upcoming-text: var(--color-sf-cyan-300);
+  --app-status-settled-bg: var(--color-sf-success-950);     --app-status-settled-text: var(--color-sf-success-300);
+  --app-status-dismissed-bg: var(--color-sf-gray-800);      --app-status-dismissed-text: var(--color-sf-gray-300);
+  --app-status-final-bg: var(--color-sf-success-950);       --app-status-final-text: var(--color-sf-success-300);
+  --app-status-archived-bg: var(--color-sf-gray-800);       --app-status-archived-text: var(--color-sf-gray-300);
+  --app-status-approved-bg: var(--color-sf-success-950);    --app-status-approved-text: var(--color-sf-success-300);
+  --app-status-escalated-bg: var(--color-sf-error-950);     --app-status-escalated-text: var(--color-sf-error-300);
+  --app-status-expiring-soon-bg: var(--color-sf-warning-950); --app-status-expiring-soon-text: var(--color-sf-warning-300);
+
+  /* Severity badges */
+  --app-severity-critical-bg: var(--color-sf-error-950);    --app-severity-critical-text: var(--color-sf-error-300);
+  --app-severity-high-bg: var(--color-sf-warning-950);      --app-severity-high-text: var(--color-sf-warning-300);
+  --app-severity-medium-bg: var(--color-sf-cyan-950);       --app-severity-medium-text: var(--color-sf-cyan-300);
+  --app-severity-low-bg: var(--color-sf-gray-800);          --app-severity-low-text: var(--color-sf-gray-400);
+
+  /* Priority / Risk text — lift toward lighter shades for contrast */
+  --app-priority-critical-text: var(--color-sf-error-400);  --app-priority-high-text: var(--color-sf-warning-400);
+  --app-priority-medium-text: var(--color-sf-cyan-400);     --app-priority-low-text: var(--color-sf-gray-400);
+  --app-risk-critical-text: var(--color-sf-error-400);      --app-risk-high-text: var(--color-sf-warning-400);
+  --app-risk-medium-text: var(--color-sf-cyan-400);         --app-risk-low-text: var(--color-sf-gray-400);
+
+  /* KPI icon tiles */
+  --app-kpi-blue-bg: var(--color-sf-brand-950);   --app-kpi-blue-text: var(--color-sf-brand-300);
+  --app-kpi-green-bg: var(--color-sf-success-950); --app-kpi-green-text: var(--color-sf-success-300);
+  --app-kpi-orange-bg: var(--color-sf-warning-950); --app-kpi-orange-text: var(--color-sf-warning-300);
+  --app-kpi-red-bg: var(--color-sf-error-950);    --app-kpi-red-text: var(--color-sf-error-300);
+  --app-kpi-purple-bg: var(--color-sf-brand-950); --app-kpi-purple-text: var(--color-sf-brand-300);
+}

@@ -1,0 +1,731 @@
+/* Contracts Kanban page. */
+
+/* ---------- Page wrapper ---------- */
+.contracts-page {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.contracts-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+  flex-wrap: wrap;
+}
+
+.contracts-page .page-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  flex-wrap: wrap;
+}
+
+/* ---------- Header chips / filter controls ---------- */
+.threshold-control {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-6) var(--spacing-12);
+  border-radius: var(--radius-8);
+  background: var(--color-sf-bg-tertiary);
+  color: var(--app-text-primary);
+  font-size: var(--font-size-sm);
+  border: 1px solid var(--color-sf-border-secondary);
+}
+
+.threshold-control label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  color: var(--app-text-secondary);
+}
+
+.threshold-input {
+  width: 112px;
+  padding: var(--spacing-4) var(--spacing-8);
+  border-radius: var(--radius-4);
+  border: 1px solid var(--color-sf-border-secondary);
+  background: var(--color-sf-bg-primary);
+  color: var(--app-text-primary);
+  font-size: var(--font-size-sm);
+}
+
+.contracts-page .btn-icon-gap {
+  margin-right: var(--spacing-6);
+}
+
+.persona-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-4);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-sf-border-secondary);
+  background: var(--color-sf-bg-tertiary);
+  gap: 0;
+}
+
+.persona-toggle button {
+  border: none;
+  background: transparent;
+  padding: var(--spacing-6) var(--spacing-12);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  color: var(--app-text-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  transition: background 0.18s, color 0.18s;
+}
+
+.persona-toggle button.is-active {
+  background: var(--color-sf-bg-brand-solid);
+  color: var(--color-sf-fg-on-brand-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ---------- Filter bar (dropdown + stage chips on one row) ---------- */
+.contracts-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-8) var(--spacing-12);
+  padding: var(--spacing-8) var(--spacing-12);
+  background: var(--app-surface);
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--card-sm-radius);
+}
+
+.contracts-filter-field {
+  flex: 0 0 220px;
+  width: 220px;
+  max-width: 220px;
+  min-width: 0;
+}
+
+.contracts-filter-field .e-control-wrapper,
+.contracts-filter-field .e-multiselect,
+.contracts-filter-field .e-multi-select-wrapper {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Popup chrome only — popupWidth 100% is relative to the input. */
+.e-popup.e-multi-select-list-wrapper.contracts-filter-input .e-list-item {
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contracts-filter-bar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: auto;
+  gap: var(--spacing-8);
+}
+
+.contracts-filter-reset.e-btn {
+  height: var(--spacing-32);
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 639px) {
+  .contracts-filter-field {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: none;
+  }
+
+  .contracts-filter-bar__actions {
+    margin-left: 0;
+  }
+}
+
+/* ---------- Error banner ---------- */
+.contracts-error-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-8);
+  background: var(--color-sf-bg-error-primary);
+  color: var(--color-sf-fg-error-primary);
+  font-size: var(--font-size-sm);
+}
+
+.contracts-error-banner button {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  padding: var(--spacing-6) var(--spacing-12);
+  border-radius: var(--radius-4);
+  border: 1px solid var(--color-sf-border-error);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+}
+
+/* ---------- Kanban container overrides (semantic tokens) ---------- */
+.contracts-kanban {
+  background: var(--color-sf-bg-secondary);
+  border-radius: var(--radius-12);
+  border: 1px solid var(--color-sf-border-secondary);
+  padding: var(--spacing-8);
+  overflow: auto;
+}
+
+.contracts-kanban .e-kanban {
+  background: transparent;
+}
+
+.contracts-kanban .e-kanban .e-kanban-header {
+  background: transparent;
+  border-bottom: 1px solid var(--color-sf-border-secondary);
+}
+
+.contracts-kanban .e-kanban .e-kanban-header .e-header-text {
+  color: var(--app-text-primary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+}
+
+.contracts-kanban .e-kanban .e-kanban-header .e-item-count {
+  background: var(--color-sf-bg-tertiary);
+  color: var(--app-text-secondary);
+  border: 1px solid var(--color-sf-border-secondary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+}
+
+.contracts-kanban .e-kanban .e-kanban-content {
+  background: transparent;
+  border: none;
+}
+
+/* Keep Kanban columns wide enough for a readable card. */
+.contracts-kanban .e-kanban .e-kanban-header .e-header-cells,
+.contracts-kanban .e-kanban .e-kanban-content .e-content-cells {
+  min-width: 288px;
+}
+
+.contracts-kanban .e-kanban .e-kanban-column {
+  background: var(--color-sf-bg-primary);
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--radius-8);
+  margin-right: var(--spacing-8);
+}
+
+.contracts-kanban .e-kanban .e-kanban-column .e-kanban-column-header {
+  border-bottom: 1px dashed var(--color-sf-border-secondary);
+}
+
+.contracts-kanban .e-kanban .e-swimlane-header {
+  background: var(--color-sf-bg-tertiary);
+  color: var(--app-text-primary);
+  border-right: 1px solid var(--color-sf-border-secondary);
+  border-bottom: 1px solid var(--color-sf-border-secondary);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+}
+
+.contracts-kanban .e-kanban .e-swimlane-row .e-kanban-column {
+  background: var(--color-sf-bg-primary);
+}
+
+/* Keep custom card badges from inheriting circular avatar/chip styles
+   Syncfusion applies to generic spans inside .e-card. */
+.contracts-kanban .e-card .contract-card__badge,
+.contracts-kanban .e-kanban-card .contract-card__badge {
+  border-radius: var(--chip-radius, var(--radius-6)) !important;
+  width: max-content !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  aspect-ratio: auto !important;
+}
+
+/* ---------- Card ---------- */
+.contract-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12) var(--spacing-14);
+  border-radius: var(--radius-8);
+  background: var(--app-surface);
+  border: 1px solid var(--color-sf-border-secondary);
+  box-shadow: var(--shadow-sm);
+  font-size: var(--font-size-sm);
+  color: var(--app-text-primary);
+}
+
+.contract-card.is-dragging {
+  opacity: 0.6;
+}
+
+.contract-card.is-overdue {
+  border-left: 3px solid var(--color-sf-border-error);
+}
+
+.contract-card.is-at-risk {
+  border-left: 3px solid var(--color-sf-border-warning);
+}
+
+.contract-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-8);
+  min-width: 0;
+}
+
+.contract-card__id {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+  color: var(--app-text-secondary);
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+  white-space: nowrap;
+}
+
+.contract-card__value {
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text-primary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.contract-card__title {
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text-primary);
+  line-height: var(--line-height-sm);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Days-in-stage (now in the footer, right of the attorney). */
+.contract-card__days {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  flex: 0 0 auto;
+  flex-shrink: 0;
+  font-size: var(--font-size-xs);
+  color: var(--app-text-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+
+.contract-card__clock {
+  display: inline-flex;
+  align-items: center;
+}
+
+.contract-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-4);
+  min-width: 0;
+}
+
+/* Capsule badge. */
+.contract-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  flex: 0 0 auto;
+  width: max-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: var(--spacing-4) var(--spacing-8);
+  border-radius: var(--chip-radius, var(--radius-6));
+  font-size: var(--font-size-xxs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-xxs);
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+
+.contract-card__badge svg {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  display: block;
+}
+
+.badge-vp {
+  background: var(--color-sf-bg-brand-primary);
+  color: var(--color-sf-fg-brand-primary);
+  border-color: var(--color-sf-border-brand);
+}
+
+.badge-session {
+  background: var(--color-sf-bg-secondary);
+  color: var(--app-text-secondary);
+  border-color: var(--color-sf-border-secondary);
+}
+
+.badge-at-risk {
+  background: var(--color-sf-bg-warning-primary);
+  color: var(--color-sf-fg-warning-primary);
+  border-color: var(--color-sf-border-warning);
+}
+
+.badge-overdue {
+  background: var(--color-sf-bg-error-primary);
+  color: var(--color-sf-fg-error-primary);
+  border-color: var(--color-sf-border-error);
+}
+
+.contract-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-8);
+  font-size: var(--font-size-xs);
+  color: var(--app-text-secondary);
+}
+
+/* Attorney avatar with initials (circular, brand background). */
+.contract-card__attorney {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  max-width: 100%;
+  min-width: 0;
+}
+
+.contract-card__attorney-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border-radius: var(--radius-full);
+  background: var(--color-sf-brand-500);
+  color: var(--color-sf-fg-on-brand-primary);
+  font-size: 9px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.contract-card__attorney-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ---------- Renewal countdown row (only in RenewalExpiry column) ---------- */
+.contract-card__renewal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-6) var(--spacing-8);
+  background: var(--color-sf-bg-tertiary);
+  border-radius: var(--radius-6);
+  font-size: var(--font-size-xxs);
+}
+
+.contract-card__renewal-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text-primary);
+}
+
+.contract-card__renewal-pill.is-overdue {
+  color: var(--color-sf-fg-error-primary);
+}
+
+.contract-card__renewal-pill.is-at-risk {
+  color: var(--color-sf-fg-warning-primary);
+}
+
+.contract-card__renewal-date {
+  color: var(--app-text-tertiary);
+  font-size: var(--font-size-xxs);
+}
+
+/* ---------- Empty / error states ---------- */
+.contracts-empty,
+.contracts-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-48) var(--spacing-24);
+  text-align: center;
+  background: var(--color-sf-bg-secondary);
+  border: 1px dashed var(--color-sf-border-secondary);
+  border-radius: var(--radius-12);
+  color: var(--app-text-secondary);
+}
+
+.contracts-empty h3,
+.contracts-error h3 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  color: var(--app-text-primary);
+}
+
+.contracts-empty p,
+.contracts-error p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  max-width: 576px;
+}
+
+/* ---------- Loading skeleton ---------- */
+.contracts-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  padding: var(--spacing-16);
+  background: var(--color-sf-bg-secondary);
+  border-radius: var(--radius-12);
+  border: 1px solid var(--color-sf-border-secondary);
+}
+
+.contracts-skeleton__columns {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(220px, 1fr));
+  gap: var(--spacing-8);
+  overflow-x: auto;
+}
+
+.contracts-skeleton__column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12);
+  background: var(--color-sf-bg-primary);
+  border-radius: var(--radius-8);
+  border: 1px solid var(--color-sf-border-secondary);
+  min-height: 288px;
+}
+
+@media (max-width: 1280px) {
+  .contracts-skeleton__columns {
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .contracts-skeleton__columns {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
+/* ---------- Live region (a11y) ---------- */
+.contracts-sr-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Reset demo data affordance ---------- */
+.contracts-page .session-changes-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-6) var(--spacing-12);
+  border-radius: var(--radius-4);
+  background: var(--color-sf-bg-warning-primary);
+  color: var(--color-sf-fg-warning-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.contracts-page .session-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-24);
+  height: var(--spacing-24);
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  border-radius: var(--radius-4);
+  transition: background 0.2s;
+}
+
+.contracts-page .session-reset-btn:hover {
+  background: var(--color-sf-bg-primary-hover);
+}
+
+/* ---------- KPI strip (5 cards) ---------- */
+.contracts-kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--spacing-12);
+}
+
+.contracts-kpi-strip .e-card.kpi-card {
+  margin: 0;
+  min-width: 0;
+}
+
+@media (max-width: 1279px) {
+  .contracts-kpi-strip {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767px) {
+  .contracts-kpi-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 479px) {
+  .contracts-kpi-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Filter chip strip (Syncfusion ChipList) ---------- */
+.contracts-filter-chips {
+  display: flex;
+  align-items: center;
+  flex: 1 1 280px;
+  flex-wrap: wrap;
+  gap: var(--spacing-6);
+  min-width: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.contracts-stage-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-6);
+}
+
+.contracts-filter-chips .e-chip-list {
+  padding: 0;
+}
+
+.contracts-stage-chip.e-chip {
+  font-size: var(--font-size-xs);
+  border-radius: var(--chip-radius, var(--radius-6));
+}
+
+/* ---------- Return-to-Draft dialog ---------- */
+.return-draft-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.return-draft-form__intro {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--app-text-secondary);
+  line-height: var(--line-height-sm);
+}
+
+.return-draft-form__intro strong {
+  color: var(--app-text-primary);
+}
+
+.return-draft-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+}
+
+.return-draft-form__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text-primary);
+}
+
+.return-draft-form__categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+}
+
+.return-draft-form__radio {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  padding: var(--spacing-6) var(--spacing-10);
+  border-radius: var(--chip-radius, var(--radius-6));
+  border: 1px solid var(--color-sf-border-secondary);
+  background: var(--color-sf-bg-primary);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  color: var(--app-text-primary);
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.return-draft-form__radio:hover {
+  border-color: var(--color-sf-border-brand);
+}
+
+.return-draft-form__radio:has(input:checked) {
+  border-color: var(--color-sf-border-brand);
+  background: var(--color-sf-bg-brand-primary);
+  color: var(--color-sf-fg-brand-primary);
+}
+
+.return-draft-form__radio input {
+  accent-color: var(--color-sf-brand-500);
+}
+
+.return-draft-form__textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--spacing-10) var(--spacing-12);
+  border-radius: var(--radius-6);
+  border: 1px solid var(--color-sf-border-secondary);
+  background: var(--color-sf-bg-primary);
+  color: var(--app-text-primary);
+  font-size: var(--font-size-sm);
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+}
+
+.return-draft-form__textarea:focus {
+  border-color: var(--color-sf-border-brand);
+  box-shadow: 0 0 0 3px var(--color-sf-focus-ring, var(--color-sf-bg-brand-primary));
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .contracts-page .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .threshold-input {
+    width: 80px;
+  }
+}

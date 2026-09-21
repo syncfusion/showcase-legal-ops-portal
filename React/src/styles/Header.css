@@ -1,0 +1,57 @@
+/* Header — mobile hamburger only. */
+
+.app-header {
+  height: var(--header-height);
+  background: var(--color-sf-bg-primary);
+  border-bottom: 1px solid var(--color-sf-border-secondary);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--spacing-24);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* Mobile-only hamburger button (hidden on desktop where sidebar is docked). */
+.menu-toggle-btn {
+  display: none;
+  background: var(--color-sf-base-transparent);
+  border: none;
+  padding: var(--spacing-8);
+  border-radius: var(--radius-6);
+  color: var(--app-text-secondary);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.menu-toggle-btn:hover {
+  background: var(--color-sf-bg-secondary);
+  color: var(--app-text-primary);
+}
+
+.menu-toggle-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring2);
+}
+
+/* Hide the header on desktop. */
+@media (min-width: 768px) {
+  .app-header {
+    display: none;
+  }
+}
+
+/* ---------- Mobile: show hamburger ---------- */
+@media (max-width: 767px) {
+  .menu-toggle-btn {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0 var(--spacing-12);
+  }
+}

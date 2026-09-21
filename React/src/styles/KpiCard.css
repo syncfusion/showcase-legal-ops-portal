@@ -1,0 +1,149 @@
+/* KPI card. */
+
+.kpi-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  min-width: 180px;
+  text-align: left;
+  gap: var(--spacing-12);
+  padding: var(--spacing-20);
+  background: var(--app-surface);
+  border: 1px solid var(--color-sf-border-secondary);
+  border-radius: var(--card-sm-radius);
+  box-shadow: var(--shadow-sm);
+  font-family: inherit;
+  color: var(--app-text-primary);
+  box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.kpi-card--clickable {
+  cursor: pointer;
+}
+
+.kpi-card--clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-sf-border-primary);
+}
+
+.kpi-card--clickable:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring2);
+}
+
+/* ---- Icon (top-right circular surface) ---- */
+.kpi-card .kpi-card-icon {
+  position: absolute;
+  top: var(--spacing-16);
+  right: var(--spacing-16);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-lg);
+  flex-shrink: 0;
+  border: 1px solid var(--color-sf-border-secondary);
+}
+
+/* ---- Syncfusion e-card sub-title (used as the KPI title) ---- */
+.kpi-card .e-card-header {
+  width: 100%;
+}
+
+.kpi-card .e-card-header-caption {
+  width: 100%;
+}
+
+.kpi-card .e-card-sub-title.kpi-card-title {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--app-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+  line-height: 1.3;
+}
+
+/* ---- Value ---- */
+.kpi-card .e-card-content.kpi-card-value {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--app-text-primary);
+  line-height: 1;
+  padding: 0;
+  border: none;
+  margin: 0;
+}
+
+/* ---- Sparkline (Syncfusion Sparkline micro-trend) ---- */
+.kpi-card .e-card-content.kpi-card-sparkline {
+  width: 100%;
+  margin-top: var(--spacing-4);
+}
+
+.kpi-card .e-card-content.kpi-card-sparkline svg {
+  display: block;
+  width: 100%;
+  height: 36px;
+}
+
+/* ---- Progress (Syncfusion ProgressBar) ---- */
+.kpi-card .e-card-content.kpi-card-progress {
+  width: 100%;
+  margin-top: var(--spacing-4);
+}
+
+.kpi-card .e-card-content.kpi-card-progress .e-progressbar {
+  height: 6px;
+}
+
+.kpi-card .e-card-content.kpi-card-progress .e-progressbar .e-progress {
+  border-radius: var(--radius-full);
+}
+
+.kpi-card .e-card-content.kpi-card-progress .e-progressbar .e-progress-bar {
+  border-radius: var(--radius-full);
+}
+
+/* ---- Actions (subtitle / trend) ---- */
+.kpi-card .e-card-actions.kpi-card-actions {
+  width: 100%;
+  margin-top: auto;
+  padding: 0;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  flex-wrap: wrap;
+}
+
+.kpi-card .kpi-card-trend {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+}
+
+.kpi-card .kpi-card-subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--app-text-tertiary);
+}
+
+/* ---- Skeleton state ---- */
+.kpi-card.kpi-card--skeleton {
+  cursor: default;
+  min-height: 132px;
+  gap: var(--spacing-16);
+}
+
+.kpi-card.kpi-card--skeleton .e-card-header,
+.kpi-card.kpi-card--skeleton .e-card-content,
+.kpi-card.kpi-card--skeleton .e-card-actions {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
