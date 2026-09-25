@@ -462,9 +462,8 @@
   font-size: var(--font-size-xxs);
 }
 
-/* ---------- Empty / error states ---------- */
-.contracts-empty,
-.contracts-error {
+/* ---------- Empty state ---------- */
+.contracts-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -478,15 +477,13 @@
   color: var(--app-text-secondary);
 }
 
-.contracts-empty h3,
-.contracts-error h3 {
+.contracts-empty h3 {
   margin: 0;
   font-size: var(--font-size-lg);
   color: var(--app-text-primary);
 }
 
-.contracts-empty p,
-.contracts-error p {
+.contracts-empty p {
   margin: 0;
   font-size: var(--font-size-sm);
   max-width: 576px;

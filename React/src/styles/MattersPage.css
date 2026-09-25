@@ -1,11 +1,5 @@
 /* Matters list page — BDS semantic tokens only (no Material token names, rem, or rgba). */
 
-.matters-page .panel-body--inline-alert {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-12);
-}
-
 .matters-page .page-header {
   display: flex;
   justify-content: space-between;

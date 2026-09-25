@@ -347,22 +347,6 @@ function MattersPage() {
     [matterEdits, lineOverrides],
   );
 
-  if (loadState === 'error') {
-    return (
-      <div className="page matters-page">
-        <div className="panel" role="alert">
-          <div className="panel-body panel-body--inline-alert">
-            <AlertTriangle size={20} aria-hidden="true" />
-            <span>{errorMsg ?? 'Could not load the matter register. Please try again.'}</span>
-            <button type="button" className="btn btn-primary" onClick={() => void load()}>
-              <RefreshCw size={14} aria-hidden="true" /> Retry
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="page matters-page">
       <div className="page-header">
@@ -390,6 +374,16 @@ function MattersPage() {
           </button>
         </div>
       </div>
+
+      {loadState === 'error' && (
+        <div className="dashboard-banner dashboard-banner--error" role="alert">
+          <AlertTriangle size={18} aria-hidden="true" />
+          <span>{errorMsg ?? 'Could not load the matter register. Please try again.'}</span>
+          <button type="button" className="banner-retry" onClick={() => void load()}>
+            <RefreshCw size={15} aria-hidden="true" /> Retry
+          </button>
+        </div>
+      )}
 
       {loadState === 'loading' && <MattersSkeleton />}
 

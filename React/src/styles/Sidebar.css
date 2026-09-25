@@ -299,7 +299,8 @@ div.sidebar-content {
   pointer-events: auto;
 }
 
-.sidebar-shell--drawer {
+/* Outrank aside.sidebar-shell so the drawer is fixed above the backdrop. */
+aside.sidebar-shell.sidebar-shell--drawer {
   position: fixed;
   top: 0;
   left: 0;
@@ -316,12 +317,12 @@ div.sidebar-content {
   box-shadow: var(--shadow-xl);
 }
 
-.sidebar-shell--drawer.is-open {
+aside.sidebar-shell.sidebar-shell--drawer.is-open {
   transform: translateX(0);
 }
 
 /* When in drawer mode, the content is always full-width (no collapsed state) */
-.sidebar-shell--drawer .sidebar-content {
+aside.sidebar-shell.sidebar-shell--drawer .sidebar-content {
   width: var(--sidebar-width-expanded);
   min-width: var(--sidebar-width-expanded);
 }
@@ -333,7 +334,7 @@ div.sidebar-content {
   .sidebar-brand-text,
   .nav-label,
   .nav-badge,
-  .sidebar-shell--drawer,
+  aside.sidebar-shell.sidebar-shell--drawer,
   .sidebar-backdrop {
     transition-duration: 0.01ms !important;
   }

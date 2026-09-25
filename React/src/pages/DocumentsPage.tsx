@@ -420,22 +420,6 @@ function DocumentsPage() {
       : `PDF Preview — ${selectedDocument.fileName}`
     : 'Preview';
 
-  if (loadState === 'error' && !matters.length) {
-    return (
-      <div className="page documents-page">
-        <div className="panel" role="alert">
-          <div className="panel-body panel-body--inline-alert">
-            <AlertTriangle size={20} aria-hidden="true" />
-            <span>{errorMsg ?? 'Could not load documents.'}</span>
-            <button type="button" className="btn btn-primary" onClick={() => void loadMatters()}>
-              <RefreshCw size={14} aria-hidden="true" /> Retry
-            </button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="page documents-page">
       <div className="page-header">
@@ -474,14 +458,19 @@ function DocumentsPage() {
       )}
 
       {loadState === 'error' && (
-        <div className="panel" role="alert">
-          <div className="panel-body panel-body--inline-alert">
-            <AlertTriangle size={20} aria-hidden="true" />
-            <span>{errorMsg}</span>
-            <button type="button" className="btn btn-primary" onClick={() => void loadDocumentsForMatter(selectedMatter)}>
-              <RefreshCw size={14} aria-hidden="true" /> Retry
-            </button>
-          </div>
+        <div className="dashboard-banner dashboard-banner--error" role="alert">
+          <AlertTriangle size={18} aria-hidden="true" />
+          <span>{errorMsg ?? 'Could not load documents.'}</span>
+          <button
+            type="button"
+            className="banner-retry"
+            onClick={() => {
+              if (matters.length === 0) void loadMatters();
+              else void loadDocumentsForMatter(selectedMatter);
+            }}
+          >
+            <RefreshCw size={15} aria-hidden="true" /> Retry
+          </button>
         </div>
       )}
 

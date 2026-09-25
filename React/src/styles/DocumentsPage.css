@@ -4,12 +4,6 @@
   position: relative;
 }
 
-.documents-page .panel-body--inline-alert {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-12);
-}
-
 .documents-matter-select {
   min-width: 320px;
   width: 320px;

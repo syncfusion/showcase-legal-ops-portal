@@ -213,14 +213,18 @@ function MatterDetailPage() {
   if (loadState === 'error') {
     return (
       <div className="page">
-        <div className="panel" role="alert">
-          <div className="panel-body" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <AlertTriangle size={20} aria-hidden="true" />
-            <span>{errorMsg ?? 'Could not load matter detail.'}</span>
-            <button type="button" className="btn btn-primary" onClick={() => void load()}>
-              <RefreshCw size={14} aria-hidden="true" /> Retry
-            </button>
+        <div className="page-header">
+          <div>
+            <h1>{matterNumber || 'Matter'}</h1>
+            <p className="page-subtitle">Matter detail</p>
           </div>
+        </div>
+        <div className="dashboard-banner dashboard-banner--error" role="alert">
+          <AlertTriangle size={18} aria-hidden="true" />
+          <span>{errorMsg ?? 'Could not load matter detail.'}</span>
+          <button type="button" className="banner-retry" onClick={() => void load()}>
+            <RefreshCw size={15} aria-hidden="true" /> Retry
+          </button>
         </div>
       </div>
     );

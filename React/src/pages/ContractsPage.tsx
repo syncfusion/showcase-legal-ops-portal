@@ -6,7 +6,7 @@ import {
   KanbanComponent, ColumnsDirective, ColumnDirective,
   StackedHeadersDirective, StackedHeaderDirective,
 } from '@syncfusion/ej2-react-kanban';
-import { SkeletonComponent, ToastComponent } from '@syncfusion/ej2-react-notifications';
+import { SkeletonComponent, ToastUtility } from '@syncfusion/ej2-react-notifications';
 import {
   ButtonComponent, ChipListComponent, ChipsDirective, ChipDirective,
 } from '@syncfusion/ej2-react-buttons';
@@ -135,7 +135,6 @@ function parseStageParam(value: string | null): LifecycleStage | null {
 function ContractsPage() {
   const { persona, setPersona, canApprove } = usePersona();
   const kanbanRef = useRef<KanbanComponent | null>(null);
-  const toastRef = useRef<ToastComponent | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [loadState, setLoadState] = useState<LoadState>('loading');
@@ -321,18 +320,19 @@ function ContractsPage() {
     saveOverlay(overlay);
   }, [overlay]);
 
-  // ---- Toast helpers (via Syncfusion ToastComponent ref) ----
+  // ToastUtility keeps the toast node outside this page so unmount does not crash the shell.
   const showToast = useCallback((kind: ToastKind, message: string) => {
-    if (toastRef.current) {
-      void toastRef.current.show({
-        content: message,
-        cssClass: `e-toast-${kind}`,
-        icon: kind === 'success' ? 'e-icons e-success' :
-          kind === 'warning' ? 'e-icons e-warning' :
-          kind === 'error' ? 'e-icons e-error' : 'e-icons e-info',
-        timeOut: 4000,
-      });
-    }
+    ToastUtility.show({
+      content: message,
+      cssClass: `e-toast-${kind}`,
+      icon: kind === 'success' ? 'e-icons e-success' :
+        kind === 'warning' ? 'e-icons e-warning' :
+        kind === 'error' ? 'e-icons e-error' : 'e-icons e-info',
+      timeOut: 4000,
+      position: { X: 'Center', Y: 'Bottom' },
+      showCloseButton: true,
+      width: 360,
+    });
     setLiveMessage(message);
   }, []);
 
@@ -564,31 +564,6 @@ function ContractsPage() {
 
   // ---- Render ----
 
-  if (loadState === 'error') {
-    return (
-      <div className="page contracts-page">
-        <div className="page-header">
-          <div>
-            <h1>Contracts</h1>
-            <p className="page-subtitle">End-to-end contract lifecycle board</p>
-          </div>
-        </div>
-        <div className="contracts-error" role="alert">
-          <AlertTriangle size={36} aria-hidden="true" />
-          <h3>Could not load contracts</h3>
-          <p>{errorMsg ?? 'There was a problem loading the lifecycle board. Please try again.'}</p>
-          <ButtonComponent
-            cssClass="e-primary"
-            onClick={() => void load()}
-          >
-            <RefreshCw size={14} aria-hidden="true" className="btn-icon-gap" />
-            Retry
-          </ButtonComponent>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="page contracts-page">
       <div className="page-header">
@@ -624,6 +599,16 @@ function ContractsPage() {
       <div className="contracts-sr-live" role="status" aria-live="polite" aria-atomic="true">
         {liveMessage}
       </div>
+
+      {loadState === 'error' && (
+        <div className="dashboard-banner dashboard-banner--error" role="alert">
+          <AlertTriangle size={18} aria-hidden="true" />
+          <span>{errorMsg ?? 'There was a problem loading the lifecycle board. Please try again.'}</span>
+          <button type="button" className="banner-retry" onClick={() => void load()}>
+            <RefreshCw size={15} aria-hidden="true" /> Retry
+          </button>
+        </div>
+      )}
 
       {loadState === 'loading' && <ContractsSkeleton />}
 
@@ -834,14 +819,6 @@ function ContractsPage() {
         />
       )}
 
-      {/* Toast notifications via Syncfusion ToastComponent. */}
-      <ToastComponent
-        ref={(t: ToastComponent | null) => { toastRef.current = t; }}
-        id="contracts-toast"
-        position={{ X: 'Center', Y: 'Bottom' }}
-        showCloseButton={true}
-        width={360}
-      />
     </div>
   );
 }

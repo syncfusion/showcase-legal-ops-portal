@@ -12,7 +12,7 @@ import { ListViewComponent } from '@syncfusion/ej2-react-lists';
 import { MultiSelectComponent } from '@syncfusion/ej2-react-dropdowns';
 import { ButtonComponent, ChipListComponent, ChipsDirective, ChipDirective } from '@syncfusion/ej2-react-buttons';
 import { DialogComponent } from '@syncfusion/ej2-react-popups';
-import { ToastComponent, SkeletonComponent } from '@syncfusion/ej2-react-notifications';
+import { SkeletonComponent, ToastUtility } from '@syncfusion/ej2-react-notifications';
 import { AlertTriangle, Calendar, RefreshCw } from 'lucide-react';
 
 import { ApiError, listDeadlines, getLookup } from '../services';
@@ -105,7 +105,7 @@ type LoadState = 'loading' | 'success' | 'empty' | 'error';
 export default function DeadlinesPage() {
   const navigate = useNavigate();
   const scheduleRef = useRef<ScheduleComponent | null>(null);
-  const toastRef = useRef<ToastComponent | null>(null);
+
   const quickInfoDialogRef = useRef<DialogComponent | null>(null);
 
   const [loadState, setLoadState] = useState<LoadState>('loading');
@@ -136,11 +136,13 @@ export default function DeadlinesPage() {
 
   //---- Toast helper --------------------------------------------------------
   const showToast = useCallback((kind: 'success' | 'info' | 'warning' | 'error', msg: string) => {
-    toastRef.current?.show({
+    ToastUtility.show({
       content: msg,
       cssClass: `e-toast-${kind} deadlines-toast`,
-      timeout: 3500,
-    } as any);
+      timeOut: 3500,
+      position: { X: 'Right', Y: 'Bottom' },
+      showCloseButton: true,
+    });
   }, []);
 
   const load = useCallback(async () => {
@@ -590,14 +592,44 @@ export default function DeadlinesPage() {
   if (loadState === 'error') {
     return (
       <div className="page deadlines-page">
-        <div className="panel" role="alert">
-          <div className="panel-body panel-body--inline-alert">
-            <AlertTriangle size={20} aria-hidden="true" />
-            <span>{errorMsg ?? 'Could not load deadlines.'}</span>
-            <button type="button" className="btn btn-primary" onClick={() => void load()}>
-              <RefreshCw size={14} aria-hidden="true" /> Retry
-            </button>
+        <div className="page-header">
+          <div>
+            <h1>Deadlines &amp; Calendar</h1>
+            <p className="page-subtitle">Court / Filing / Statute of Limitations / Renewal — across all matters and contracts</p>
           </div>
+          <div className="deadlines-header__actions">
+            <div className="deadlines-persona" role="group" aria-label="Demo persona">
+              <ButtonComponent
+                cssClass="e-flat"
+                type={persona === 'LegalOps' ? 'primary' : 'flat'}
+                onClick={() => setPersona('LegalOps')}
+                disabled={persona === 'LegalOps'}
+              >
+                Legal Ops
+              </ButtonComponent>
+              <ButtonComponent
+                cssClass="e-flat"
+                type={persona === 'Attorney' ? 'primary' : 'flat'}
+                onClick={() => setPersona('Attorney')}
+                disabled={persona === 'Attorney'}
+              >
+                Attorney
+              </ButtonComponent>
+            </div>
+            {sessionChangesCount > 0 && (
+              <button className="deadlines-session-chip" onClick={resetSession} title="Reset session changes">
+                <span className="e-icons e-circle-trangle-2-a" aria-hidden="true" />
+                Session changes: {sessionChangesCount}
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="dashboard-banner dashboard-banner--error" role="alert">
+          <AlertTriangle size={18} aria-hidden="true" />
+          <span>{errorMsg ?? 'Could not load deadlines.'}</span>
+          <button type="button" className="banner-retry" onClick={() => void load()}>
+            <RefreshCw size={15} aria-hidden="true" /> Retry
+          </button>
         </div>
       </div>
     );
@@ -1036,7 +1068,6 @@ export default function DeadlinesPage() {
         )}
       </DialogComponent>
 
-      <ToastComponent ref={(r: ToastComponent | null) => { toastRef.current = r; }} position={{ X: 'Right', Y: 'Bottom' }} />
     </div>
   );
 }

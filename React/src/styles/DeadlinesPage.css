@@ -6,12 +6,6 @@
   gap: var(--spacing-16);
 }
 
-.deadlines-page .panel-body--inline-alert {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-12);
-}
-
 /* ---- Header ---------------------------------------------------------- */
 .deadlines-page .page-header {
   display: flex;
